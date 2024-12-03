@@ -26,7 +26,7 @@ final class CharacterProfile{
     public class DreamYouActivity extends AppCompatActivity implements View.OnClickListener{
         public static final String TAG = "DREAM_LIFE_ACTIVITY";
 
-        private static final CharacterProfile[] CHARACTER_PROFILES = {
+        private final CharacterProfile[] CHARACTER_PROFILES = {
                 new CharacterProfile("Hercules", R.drawable.hercules),
                 new CharacterProfile("Cool Guy", R.drawable.cool_guy),
                 new CharacterProfile("Cleopatra", R.drawable.cleopatra),
