@@ -1,4 +1,14 @@
 package edu.psu.ist.hcdd340.finalproject;
 
-public class DreamHouseActivity {
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class DreamHouseActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dreamhouse);
+    }
 }
