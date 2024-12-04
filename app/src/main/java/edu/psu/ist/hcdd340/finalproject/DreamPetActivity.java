@@ -50,7 +50,7 @@ final class PetProfile {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_pet);//have to make this an xml file and then itll be fine
+            setContentView(R.layout.activity_dreampet);//have to make this an xml file and then itll be fine
 
             //Set event handler for icons
             ShapeableImageView prev = findViewById(R.id.prev_button);

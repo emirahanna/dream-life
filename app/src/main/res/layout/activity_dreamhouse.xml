@@ -7,7 +7,7 @@
     android:background="#00FFFFFF">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/character_image"
+        android:id="@+id/house_image"
         android:layout_width="0dp"
         android:layout_height="200dp"
         app:layout_constraintBottom_toTopOf="@+id/save_button"

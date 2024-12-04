@@ -60,7 +60,7 @@ final class DreamHouse {
 
         //updates screen to show a given DreamHouse
         private void showDreamHouse(DreamHouse dreamHouse) {
-            ImageView houseImage = findViewById(R.id.houseImage);
+            ImageView houseImage = findViewById(R.id.house_image);
             houseImage.setImageResource(dreamHouse.getHouseImageId());
 
         }
