@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.imageview.ShapeableImageView;
 
-final class CharacterProfile{
+final class HouseProfile {
     private final String characterName;
     private final int characterImageID;
 
-    CharacterProfile(String characterName, int characterImageID)
+    HouseProfile(String characterName, int characterImageID)
     {
         this.characterName= characterName;
         this.characterImageID=characterImageID;
@@ -30,7 +30,7 @@ final class CharacterProfile{
 
         public static final String TAG = "DREAM_LIFE_ACTIVITY";
 
-        private final int[] ACTION_INCON_IDS =
+        private final int[] ACTION_ICON_IDS =
                 {
                   R.id.prev_button,
                   R.id.next_button,
@@ -38,13 +38,13 @@ final class CharacterProfile{
 
                 };
 
-        private final CharacterProfile[] CHARACTER_PROFILES = {
-                new CharacterProfile("Hercules", R.drawable.hercules),
-                new CharacterProfile("Cool Guy", R.drawable.cool_guy),
-                new CharacterProfile("Cleopatra", R.drawable.cleopatra),
-                new CharacterProfile("Fancy Lady", R.drawable.fancylady),
-                new CharacterProfile("Lady", R.drawable.lady),
-                new CharacterProfile("Some Guy", R.drawable.someguy)
+        private final PetProfile[] CHARACTER_PROFILES = {
+                new PetProfile("Hercules", R.drawable.hercules),
+                new PetProfile("Cool Guy", R.drawable.cool_guy),
+                new PetProfile("Cleopatra", R.drawable.cleopatra),
+                new PetProfile("Fancy Lady", R.drawable.fancylady),
+                new PetProfile("Lady", R.drawable.lady),
+                new PetProfile("Some Guy", R.drawable.someguy)
         };
 
         private int index = 0;
@@ -69,18 +69,18 @@ final class CharacterProfile{
         public void onClick(View view) {
         int eventSourceId = view.getId();
 
-        CharacterProfile characterProfile = getCurrentProfile();
+        PetProfile characterProfile = getCurrentProfile();
 
 
         }
 
-        private CharacterProfile moveToNextProfile()
+        private PetProfile moveToNextProfile()
         {
             index= (index + 1) % CHARACTER_PROFILES.length;
             return CHARACTER_PROFILES[index];
         }
 
-        private CharacterProfile moveToPreviousProfile()
+        private PetProfile moveToPreviousProfile()
         {
             index = index - 1;
             if (index <0)
@@ -88,7 +88,7 @@ final class CharacterProfile{
             return CHARACTER_PROFILES[index];
         }
 
-        private CharacterProfile getCurrentProfile ()
+        private PetProfile getCurrentProfile ()
         {
             return CHARACTER_PROFILES[index];
         }
