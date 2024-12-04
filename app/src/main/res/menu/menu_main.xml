@@ -7,6 +7,9 @@
         android:title="@string/menu_profile"
         app:showAsAction="never" />
     <item
+        android:id="@+id/menu_you"
+        android:title="@string/menu_you" />
+    <item
         android:id="@+id/menu_house"
         android:title="@string/menu_house"
         app:showAsAction="never" />

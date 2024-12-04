@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Array of possible options for a dream house
     private final DreamHouse[] DREAM_HOUSES = {new DreamHouse("Cloud Island", R.drawable.floatingisland), new DreamHouse("Night Watch House", R.drawable.nightwatchhouse), new DreamHouse("Hidden Island", R.drawable.hiddenisland), new DreamHouse("Barn", R.drawable.barnhouse)};
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dreamhouse);
+        setContentView(R.layout.activity_dream);
         showDreamHouse(getCurrentProfile());
 
         //attach action listeners to buttons
@@ -35,13 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        Log.d("FUCK", "menu inflated");
         return true;
     }
 
     //updates screen to show a given DreamHouse
     private void showDreamHouse(DreamHouse dreamHouse) {
-        ImageView houseImage = findViewById(R.id.house_image);
+        ImageView houseImage = findViewById(R.id.image_preview);
         houseImage.setImageResource(dreamHouse.getHouseImageId());
 
     }
@@ -58,20 +57,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else Log.d("FUCK", "Unknown ID: " + id);
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("FUCK", "pre-intent");
+        Class changedClass = this.getClass();
         int menuId = item.getItemId();
-        Log.d("FUCK", "post get item id");
 
-        if (menuId == R.id.menu_profile) {
-            Intent intent = new Intent(this, DreamYouActivity.class);
-            startActivity(intent);
-            Log.d("FUCK", "post-intent");
-            return true;
+        if (menuId == R.id.menu_house) {
+            changedClass = DreamHouseActivity.class;
+        } else if (menuId == R.id.menu_ambition) {
+            changedClass = DreamJobActivity.class;
+        } else if (menuId == R.id.menu_pet) {
+            changedClass = DreamPetActivity.class;
+        } else if (menuId == R.id.menu_you) {
+            changedClass = DreamYouActivity.class;
+        } else if (menuId == R.id.menu_profile) {
+            changedClass = VisionBoardActivity.class;
         }
 
+        createIntentAndStartActivity(this, changedClass);
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean createIntentAndStartActivity(Context context, Class cls) {
+        Intent intent = new Intent(context, cls);
+        startActivity(intent);
+        return true;
     }
 
 

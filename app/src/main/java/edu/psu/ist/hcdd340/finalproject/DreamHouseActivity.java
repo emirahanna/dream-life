@@ -31,6 +31,8 @@ final class DreamHouse {
 
 public class DreamHouseActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String TAG = "DREAM_HOUSE_ACTIVITY";
+
     //Array of possible options for a dream house
     private final DreamHouse[] DREAM_HOUSES = {new DreamHouse("Cloud Island", R.drawable.floatingisland), new DreamHouse("Night Watch House", R.drawable.nightwatchhouse), new DreamHouse("Hidden Island", R.drawable.hiddenisland), new DreamHouse("Barn", R.drawable.barnhouse)};
 
@@ -41,8 +43,8 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dreamhouse);
-        showDreamHouse(getCurrentProfile());
+        setContentView(R.layout.activity_dream);
+        updateImage(getCurrentProfile());
 
         //attach action listeners to buttons
         for (int id : ACTION_ICON_IDS) {
@@ -57,22 +59,21 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
     }
 
     //updates screen to show a given DreamHouse
-    private void showDreamHouse(DreamHouse dreamHouse) {
-        ImageView houseImage = findViewById(R.id.house_image);
-        houseImage.setImageResource(dreamHouse.getHouseImageId());
-
+    private void updateImage(DreamHouse dreamHouse) {
+        ImageView img = findViewById(R.id.image_preview);
+        img.setImageResource(dreamHouse.getHouseImageId());
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
         if ((id == R.id.next_button)) {
-            showDreamHouse(moveToNextProfile());
+            updateImage(moveToNextProfile());
         } else if (id == R.id.prev_button) {
-            showDreamHouse(moveToPreviousProfile());
+            updateImage(moveToPreviousProfile());
         } else if (id == R.id.save_button) {
-            Log.d("ON CLICK IN DREAMHOUSE ACTIVITY", "saves it: " + id);
-        } else Log.d("ON CLICK IN DREAMHOUSE ACTIVITY", "Unknown ID: " + id);
+            Log.d(TAG, "saves it: " + id);
+        } else Log.d(TAG, "Unknown ID: " + id);
     }
 
     @Override
@@ -86,8 +87,9 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
             changedClass = DreamJobActivity.class;
         } else if (menuId == R.id.menu_pet) {
             changedClass = DreamPetActivity.class;
-        }
-        else if (menuId == R.id.menu_profile) {
+        } else if (menuId == R.id.menu_you) {
+            changedClass = DreamYouActivity.class;
+        } else if (menuId == R.id.menu_profile) {
             changedClass = VisionBoardActivity.class;
         }
 

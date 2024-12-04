@@ -7,4 +7,5 @@
     <string name="menu_ambition">Ambition</string>
     <string name="menu_pet">Pet</string>
     <string name="menu_logout">Log Out</string>
+    <string name="menu_you">You</string>
 </resources>
