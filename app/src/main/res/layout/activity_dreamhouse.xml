@@ -6,17 +6,7 @@
     android:layout_height="match_parent"
     android:background="#00FFFFFF">
 
-    <ImageView
-        android:id="@+id/avatar_image"
-        android:layout_width="160dp"
-        android:layout_height="157dp"
-        app:layout_constraintBottom_toTopOf="@+id/save_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +17,7 @@
         app:layout_constraintTop_toTopOf="@+id/save_button"
         app:srcCompat="@drawable/next_button_icon" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@+id/prev_button"
         app:srcCompat="@drawable/save_icon" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/prev_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,7 +37,17 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82"
+        app:layout_constraintVertical_bias="0.92"
         app:srcCompat="@drawable/prev_button_icon" />
+
+    <ImageView
+        android:id="@+id/houseImage"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/save_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/avtr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

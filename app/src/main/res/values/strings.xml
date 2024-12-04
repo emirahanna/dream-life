@@ -2,4 +2,9 @@
     <string name="app_name">Dream Life</string>
     <string name="prev_button_title">Prev</string>
     <string name="next_button_title">Next</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_house">House</string>
+    <string name="menu_ambition">Ambition</string>
+    <string name="menu_pet">Pet</string>
+    <string name="menu_logout">Log Out</string>
 </resources>

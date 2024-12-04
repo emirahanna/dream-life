@@ -4,21 +4,22 @@
 
     <item
         android:id="@+id/menu_profile"
-        android:title="Profile"
+        android:title="@string/menu_profile"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_house"
-        android:title="House"
+        android:title="@string/menu_house"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_ambition"
-        android:title="Ambition"
+        android:title="@string/menu_ambition"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_pet"
-        android:title="Pet"
+        android:title="@string/menu_pet"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_logout"
-        android:title="Log Out" />
+        android:title="@string/menu_logout"
+        app:showAsAction="never" />
 </menu>
