@@ -11,10 +11,9 @@ final class JobProfile {
     private final String JobName;
     private final int jobImageID;
 
-    JobProfile(String jobName, int jobImageID)
-    {
+    JobProfile(String jobName, int jobImageID) {
         this.JobName = jobName;
-        this.jobImageID =jobImageID;
+        this.jobImageID = jobImageID;
     }
 
     public int getJobImageID() {
@@ -25,7 +24,7 @@ final class JobProfile {
         return JobName;
     }
 
-
+}
     public class DreamJobActivity extends AppCompatActivity implements View.OnClickListener {
 
         public static final String TAG = "DREAM_LIFE_ACTIVITY";
@@ -91,4 +90,4 @@ final class JobProfile {
             return JOB_PROFILES[index];
         }
     }
-}
+

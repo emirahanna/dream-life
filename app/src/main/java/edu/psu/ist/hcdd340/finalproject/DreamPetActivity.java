@@ -11,10 +11,9 @@ final class PetProfile {
     private final String petName;
     private final int petImageID;
 
-    PetProfile(String petName, int petImageID)
-    {
+    PetProfile(String petName, int petImageID) {
         this.petName = petName;
-        this.petImageID =petImageID;
+        this.petImageID = petImageID;
     }
 
     public int getPetImageID() {
@@ -24,7 +23,7 @@ final class PetProfile {
     public String getPetName() {
         return petName;
     }
-
+}
 
     public class DreamPetActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -88,4 +87,4 @@ final class PetProfile {
             return PET_PROFILES[index];
         }
     }
-}
+

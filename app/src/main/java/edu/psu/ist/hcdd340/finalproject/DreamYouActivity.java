@@ -12,10 +12,9 @@ final class HouseProfile {
     private final String characterName;
     private final int characterImageID;
 
-    HouseProfile(String characterName, int characterImageID)
-    {
-        this.characterName= characterName;
-        this.characterImageID=characterImageID;
+    HouseProfile(String characterName, int characterImageID) {
+        this.characterName = characterName;
+        this.characterImageID = characterImageID;
     }
 
     public int getProfileImageID() {
@@ -26,6 +25,7 @@ final class HouseProfile {
         return characterName;
     }
 
+}
     public class DreamYouActivity extends AppCompatActivity implements View.OnClickListener{
 
         public static final String TAG = "DREAM_LIFE_ACTIVITY";
@@ -95,7 +95,7 @@ final class HouseProfile {
 
 
     }
-}
+
 
 
 
