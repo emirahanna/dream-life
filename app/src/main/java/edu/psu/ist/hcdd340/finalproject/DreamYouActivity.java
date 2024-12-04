@@ -8,11 +8,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.snackbar.Snackbar;
 
 final class DreamYou {
     private final String youName;
@@ -69,7 +71,10 @@ final class DreamYou {
             } else if (id == R.id.prev_button) {
                 updateImage(moveToPreviousProfile());
             } else if (id == R.id.save_button) {
-                Log.d(TAG, "saves it: " + id);
+                ShapeableImageView icon = findViewById(R.id.save_button);
+                Snackbar.make(icon,
+                        R.string.save_confirmation,
+                        Snackbar.LENGTH_SHORT).show();
             } else Log.d(TAG, "Unknown ID: " + id);
         }
 
@@ -87,6 +92,8 @@ final class DreamYou {
                 changedClass = DreamYouActivity.class;
             } else if (menuId == R.id.menu_profile) {
                 changedClass = VisionBoardActivity.class;
+            }else if (menuId == R.id.menu_logout) {
+                changedClass = LogInActivity.class;
             }
 
             createIntentAndStartActivity(this, changedClass);
