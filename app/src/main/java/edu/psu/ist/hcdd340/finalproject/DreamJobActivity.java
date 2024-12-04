@@ -42,12 +42,11 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
     private final JobProfile[] JOB_PROFILES = {
             //fill in once assets are input
 
-            /*new JobProfile("Barn house", R.drawable.barnhouse),
-            new JobProfile("Floating Island", R.drawable.floatingisland),
-            new JobProfile("Hidden Island", R.drawable.hiddenisland),
-            new JobProfile("Night Watch House", R.drawable.nightwatchhouse),
-            new JobProfile("Robot House", R.drawable.robothouse)
-        */};
+            new JobProfile("Lawyer", R.drawable.gavel),
+            new JobProfile("Doctor", R.drawable.stethoscope),
+            new JobProfile("Constructor Worker", R.drawable.hardhat),
+            new JobProfile("Fireman", R.drawable.firetruck)
+        };
 
     private static int index = 0;
 
