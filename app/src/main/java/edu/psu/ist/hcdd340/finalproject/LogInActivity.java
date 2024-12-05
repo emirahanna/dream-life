@@ -51,6 +51,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             Snackbar.make(button,
                     "Logged In!",
                     Snackbar.LENGTH_LONG).show();
+
+            Intent intent = new Intent(this, DreamYouActivity.class);
+            startActivity(intent);
+            finish();
         } else {
             AlertDialog.Builder d = new AlertDialog.Builder(this);
             d.setTitle(R.string.login_error_title);
