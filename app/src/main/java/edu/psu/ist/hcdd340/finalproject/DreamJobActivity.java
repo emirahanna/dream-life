@@ -15,14 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 
-final class JobProfile {
+final class DreamJob {
     //fields
     private final String JobName;
     private final int jobImageID;
 
 
     //constructor
-    JobProfile(String jobName, int jobImageID) {
+    DreamJob(String jobName, int jobImageID) {
         this.JobName = jobName;
         this.jobImageID = jobImageID;
     }
@@ -42,16 +42,17 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
 
     public static final String TAG = "DREAM_LIFE_ACTIVITY";
     private TextView dynamicText;
+    private TextView nameText;
 
     private final int[] ACTION_ICON_IDS = {R.id.prev_button, R.id.next_button, R.id.next_button};
 
     //array of possible options for a dream job
-    private final JobProfile[] JOB_PROFILES = {
+    private final DreamJob[] JOB_PROFILES = {
 
-            new JobProfile("Lawyer", R.drawable.gavel),
-            new JobProfile("Doctor", R.drawable.stethoscope),
-            new JobProfile("Constructor Worker", R.drawable.hardhat),
-            new JobProfile("Fireman", R.drawable.firetruck)
+            new DreamJob("Lawyer", R.drawable.gavel),
+            new DreamJob("Doctor", R.drawable.stethoscope),
+            new DreamJob("Constructor Worker", R.drawable.hardhat),
+            new DreamJob("Fireman", R.drawable.firetruck)
         };
 
     private static int index = 0;//to track job option in order to move from one to the next
@@ -62,8 +63,14 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_dream);
         updateImage(getCurrentProfile());//displays image
 
+        ShapeableImageView saveButton = findViewById(R.id.save_button);
+        saveButton.setOnClickListener(this);
+
         dynamicText = findViewById(R.id.dynamicText);
         dynamicText.setText(getString(R.string.choose_job));
+
+        nameText = findViewById(R.id.nameText);
+        nameText.setText("Lawyer");
 
         //Set event handler for icons
         for (int id : ACTION_ICON_IDS) {
@@ -78,9 +85,15 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         int id = view.getId();
         if ((id == R.id.next_button)) {
-            updateImage(moveToNextProfile());
+            DreamJob nextProfile = moveToNextProfile();
+            updateImage(nextProfile);
+            updateName(nextProfile);
+
         } else if (id == R.id.prev_button) {
-            updateImage(moveToPreviousProfile());
+            DreamJob previousProfile = moveToPreviousProfile();
+            updateImage(previousProfile);
+            updateName(previousProfile);
+
         } else if (id == R.id.save_button) {
             ShapeableImageView icon = findViewById(R.id.save_button);
             Snackbar.make(icon,
@@ -96,7 +109,7 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
     }
 
     //updates screen to show a given Dream Job
-    private void updateImage(JobProfile jobProfile) {
+    private void updateImage(DreamJob jobProfile) {
         ImageView img = findViewById(R.id.image_preview);
         img.setImageResource(jobProfile.getJobImageID());
     }
@@ -115,8 +128,8 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
             changedClass = DreamPetActivity.class;
         } else if (menuId == R.id.menu_you) {
             changedClass = DreamYouActivity.class;
-        } else if (menuId == R.id.menu_profile) {
-            changedClass = VisionBoardActivity.class;
+        } else if (menuId == R.id.menu_register) {
+            changedClass = RegisterActivity.class;
         }else if (menuId == R.id.menu_logout) {
             changedClass = LogInActivity.class;
         }
@@ -132,18 +145,24 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
     }
 
     //the following three methods allow the user to move between assets or select the displayed asset
-    private JobProfile moveToNextProfile() {
+    private DreamJob moveToNextProfile() {
         index = (index + 1) % JOB_PROFILES.length;
         return JOB_PROFILES[index];
     }
 
-    private JobProfile moveToPreviousProfile() {
+    private DreamJob moveToPreviousProfile() {
         index = index - 1;
         if (index < 0) index = JOB_PROFILES.length - 1;
         return JOB_PROFILES[index];
     }
 
-    private JobProfile getCurrentProfile() {
+    private void updateName(DreamJob profile)
+    {
+        TextView nameTextView = findViewById(R.id.nameText);
+        nameTextView.setText(profile.getJobName());
+    }
+
+    private DreamJob getCurrentProfile() {
         return JOB_PROFILES[index];
     }
 }

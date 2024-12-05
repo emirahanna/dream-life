@@ -87,8 +87,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             changedClass = DreamPetActivity.class;
         } else if (menuId == R.id.menu_you) {
             changedClass = DreamYouActivity.class;
-        } else if (menuId == R.id.menu_profile) {
-            changedClass = VisionBoardActivity.class;
+        } else if (menuId == R.id.menu_register) {
+            changedClass = RegisterActivity.class;
         }
 
         createIntentAndStartActivity(this, changedClass);

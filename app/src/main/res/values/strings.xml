@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dream Life</string>
+    <string name="app_name">Design Your Life!</string>
 
     <string name="prev_button_title">Prev</string>
     <string name="next_button_title">Next</string>
@@ -35,5 +35,11 @@
     <string name= "choose_house">Choose Your House</string>
     <string name= "choose_job">Choose Your Job</string>
     <string name= "choose_pet">Choose Your Pet</string>
+
+    <string name= "default_text">What will you pick?</string>
+    <string name="character_name">Hercules</string>
+    <string name="house_name">Floating Castle</string>
+    <string name="job_name">Lawyer</string>
+    <string name="pet_name">Ralph</string>
 
 </resources>

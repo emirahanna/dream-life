@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_profile"
+        android:id="@+id/menu_register"
         android:title="@string/menu_profile"
         app:showAsAction="never" />
     <item

@@ -41,11 +41,16 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
     public static final String TAG = "DREAM_HOUSE_ACTIVITY";
 
     //Array of possible options for a dream house
-    private final DreamHouse[] DREAM_HOUSES = {new DreamHouse("Cloud Island", R.drawable.floatingisland), new DreamHouse("Night Watch House", R.drawable.nightwatchhouse), new DreamHouse("Hidden Island", R.drawable.hiddenisland), new DreamHouse("Barn", R.drawable.barnhouse)};
+    private final DreamHouse[] DREAM_HOUSES = {
+            new DreamHouse("Cloud Island", R.drawable.floatingisland),
+            new DreamHouse("Night Watch House", R.drawable.nightwatchhouse),
+            new DreamHouse("Hidden Island", R.drawable.hiddenisland),
+            new DreamHouse("Barn", R.drawable.barnhouse)};
 
     private static final int[] ACTION_ICON_IDS = {R.id.next_button, R.id.save_button, R.id.prev_button};
 
     private TextView dynamicText;
+    private TextView nameText;
 
     private static int index = 0;//to track house option in order to move from one to the next
 
@@ -57,6 +62,10 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
 
         dynamicText = findViewById(R.id.dynamicText);
         dynamicText.setText(getString(R.string.choose_house));
+
+        nameText = findViewById(R.id.nameText);
+        nameText.setText("Cloud Island");
+
         //attach action listeners to buttons
         for (int id : ACTION_ICON_IDS) {
             findViewById(id).setOnClickListener(this);
@@ -83,9 +92,15 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         int id = view.getId();
         if ((id == R.id.next_button)) {
-            updateImage(moveToNextProfile());
+            DreamHouse nextProfile = moveToNextProfile();
+            updateImage(nextProfile);
+            updateName(nextProfile);
+
         } else if (id == R.id.prev_button) {
-            updateImage(moveToPreviousProfile());
+            DreamHouse previousProfile = moveToPreviousProfile();
+            updateImage(previousProfile);
+            updateName(previousProfile);
+
         } else if (id == R.id.save_button) {
             ShapeableImageView icon = findViewById(R.id.save_button);
             Snackbar.make(icon,
@@ -108,8 +123,8 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
             changedClass = DreamPetActivity.class;
         } else if (menuId == R.id.menu_you) {
             changedClass = DreamYouActivity.class;
-        } else if (menuId == R.id.menu_profile) {
-            changedClass = VisionBoardActivity.class;
+        } else if (menuId == R.id.menu_register) {
+            changedClass = RegisterActivity.class;
         }else if (menuId == R.id.menu_logout) {
             changedClass = LogInActivity.class;
         }
@@ -135,6 +150,12 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         index = index - 1;
         if (index < 0) index = DREAM_HOUSES.length - 1;
         return DREAM_HOUSES[index];
+    }
+
+    private void updateName(DreamHouse profile)
+    {
+        TextView nameTextView = findViewById(R.id.nameText);
+        nameTextView.setText(profile.getHouseName());
     }
 
     private DreamHouse getCurrentProfile() {

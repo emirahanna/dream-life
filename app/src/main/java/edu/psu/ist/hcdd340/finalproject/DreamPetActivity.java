@@ -40,6 +40,7 @@ final class DreamPet {
 
         public static final String TAG = "DREAM_LIFE_ACTIVITY";
         private TextView dynamicText;
+        private TextView nameText;
 
         private final int[] ACTION_ICON_IDS =
                 {
@@ -49,11 +50,11 @@ final class DreamPet {
                 };
         //array of possible options for a dream pet
         private final DreamPet[] PET_PROFILES = {
-                new DreamPet("Dog", R.drawable.dog),
-                new DreamPet("Gray Cat", R.drawable.graycat),
-                new DreamPet("Orange Cat", R.drawable.orangecat),
-                new DreamPet("Special Animal", R.drawable.specialanimal),
-                new DreamPet("Squirrel", R.drawable.squirrel)
+                new DreamPet("Ralph", R.drawable.dog),
+                new DreamPet("Michael", R.drawable.graycat),
+                new DreamPet("Sandy", R.drawable.squirrel),
+                new DreamPet("Mittens", R.drawable.orangecat),
+                new DreamPet("Nathaniel", R.drawable.specialanimal)
         };
 
         private int index = 0;//to track pet option in order to move from one to the next
@@ -64,8 +65,14 @@ final class DreamPet {
             setContentView(R.layout.activity_dream);
             updateImage(getCurrentProfile());
 
+            ShapeableImageView saveButton = findViewById(R.id.save_button);
+            saveButton.setOnClickListener(this);
+
             dynamicText = findViewById(R.id.dynamicText);
             dynamicText.setText(getString(R.string.choose_pet));
+
+            nameText = findViewById(R.id.nameText);
+            nameText.setText("Ralph");
 
             //attach action listeners to buttons
             for (int id : ACTION_ICON_IDS) {
@@ -94,9 +101,15 @@ final class DreamPet {
         public void onClick(View view) {
             int id = view.getId();
             if ((id == R.id.next_button)) {
-                updateImage(moveToNextProfile());
+                DreamPet nextProfile = moveToNextProfile();
+                updateImage(nextProfile);
+                updateName(nextProfile);
+
             } else if (id == R.id.prev_button) {
-                updateImage(moveToPreviousProfile());
+                DreamPet previousProfile = moveToPreviousProfile();
+                updateImage(previousProfile);
+                updateName(previousProfile);
+
             } else if (id == R.id.save_button) {
                 ShapeableImageView icon = findViewById(R.id.save_button);
                 Snackbar.make(icon,
@@ -119,8 +132,8 @@ final class DreamPet {
                 changedClass = DreamPetActivity.class;
             } else if (menuId == R.id.menu_you) {
                 changedClass = DreamYouActivity.class;
-            } else if (menuId == R.id.menu_profile) {
-                changedClass = VisionBoardActivity.class;
+            } else if (menuId == R.id.menu_register) {
+                changedClass = RegisterActivity.class;
             }else if (menuId == R.id.menu_logout) {
                 changedClass = LogInActivity.class;
             }
@@ -147,6 +160,12 @@ final class DreamPet {
             if (index < 0)
                 index = PET_PROFILES.length - 1;
             return PET_PROFILES[index];
+        }
+
+        private void updateName(DreamPet profile)
+        {
+            TextView nameTextView = findViewById(R.id.nameText);
+            nameTextView.setText(profile.getPetName());
         }
 
         private DreamPet getCurrentProfile() {
