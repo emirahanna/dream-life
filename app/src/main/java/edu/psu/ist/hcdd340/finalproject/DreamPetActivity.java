@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,6 +39,7 @@ final class DreamPet {
     public class DreamPetActivity extends AppCompatActivity implements View.OnClickListener {
 
         public static final String TAG = "DREAM_LIFE_ACTIVITY";
+        private TextView dynamicText;
 
         private final int[] ACTION_ICON_IDS =
                 {
@@ -61,6 +63,9 @@ final class DreamPet {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_dream);
             updateImage(getCurrentProfile());
+
+            dynamicText = findViewById(R.id.dynamicText);
+            dynamicText.setText(getString(R.string.choose_pet));
 
             //attach action listeners to buttons
             for (int id : ACTION_ICON_IDS) {

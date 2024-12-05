@@ -4,9 +4,9 @@
     <string name="prev_button_title">Prev</string>
     <string name="next_button_title">Next</string>
 
-    <string name="menu_profile">Profile</string>
+    <string name="menu_profile">Register</string>
     <string name="menu_house">House</string>
-    <string name="menu_ambition">Ambition</string>
+    <string name="menu_ambition">Job</string>
     <string name="menu_pet">Pet</string>
     <string name="menu_logout">Log Out</string>
     <string name="menu_you">You</string>
@@ -29,5 +29,11 @@
     <string name="first_name_label">First Name:</string>
 
     <string name="save_confirmation">Selection Saved!</string>
+
+    //dynamic text options
+    <string name= "choose_character">Choose Your Character</string>
+    <string name= "choose_house">Choose Your House</string>
+    <string name= "choose_job">Choose Your Job</string>
+    <string name= "choose_pet">Choose Your Pet</string>
 
 </resources>

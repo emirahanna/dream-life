@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +41,7 @@ final class DreamYou {
     public class DreamYouActivity extends AppCompatActivity implements View.OnClickListener{
 
         public static final String TAG = "DREAM_YOU_ACTIVITY";
+        private TextView dynamicText;
 
         private static final int[] ACTION_ICON_IDS = {R.id.next_button, R.id.save_button, R.id.prev_button};
 
@@ -61,6 +63,8 @@ final class DreamYou {
             setContentView(R.layout.activity_dream);
             updateImage(getCurrentProfile());//displays image
 
+            dynamicText = findViewById(R.id.dynamicText);
+            dynamicText.setText(getString(R.string.choose_character));
 
             for (int id : ACTION_ICON_IDS) {
                 findViewById(id).setOnClickListener(this);

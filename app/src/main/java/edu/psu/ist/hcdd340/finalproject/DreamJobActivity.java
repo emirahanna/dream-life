@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +41,7 @@ final class JobProfile {
 public class DreamJobActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "DREAM_LIFE_ACTIVITY";
+    private TextView dynamicText;
 
     private final int[] ACTION_ICON_IDS = {R.id.prev_button, R.id.next_button, R.id.next_button};
 
@@ -59,6 +61,9 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dream);
         updateImage(getCurrentProfile());//displays image
+
+        dynamicText = findViewById(R.id.dynamicText);
+        dynamicText.setText(getString(R.string.choose_job));
 
         //Set event handler for icons
         for (int id : ACTION_ICON_IDS) {

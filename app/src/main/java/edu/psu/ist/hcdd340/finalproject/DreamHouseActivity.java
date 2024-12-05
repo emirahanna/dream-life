@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,6 +45,8 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
 
     private static final int[] ACTION_ICON_IDS = {R.id.next_button, R.id.save_button, R.id.prev_button};
 
+    private TextView dynamicText;
+
     private static int index = 0;//to track house option in order to move from one to the next
 
     @Override
@@ -52,6 +55,8 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_dream);
         updateImage(getCurrentProfile()); //displays image
 
+        dynamicText = findViewById(R.id.dynamicText);
+        dynamicText.setText(getString(R.string.choose_house));
         //attach action listeners to buttons
         for (int id : ACTION_ICON_IDS) {
             findViewById(id).setOnClickListener(this);
