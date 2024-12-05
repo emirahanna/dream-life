@@ -11,6 +11,8 @@
     <string name="menu_logout">Log Out</string>
     <string name="menu_you">You</string>
 
+    <string name="welcome_message">Welcome to Dream Life</string>
+    <string name="login_page">Login with email and password. Or click register to get started</string>
     <string name="email_label">Email:</string>
     <string name="password_label">Password:</string>
     <string name="login_button">LogIn</string>
