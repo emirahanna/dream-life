@@ -17,14 +17,17 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 
 final class DreamYou {
+    //fields
     private final String youName;
     private final int youImageID;
 
+    //constructor
     DreamYou(String youName, int youImageID) {
         this.youName = youName;
         this.youImageID = youImageID;
     }
 
+    //getters
     public int getProfileImageID() {
         return youImageID;
     }
@@ -40,6 +43,7 @@ final class DreamYou {
 
         private static final int[] ACTION_ICON_IDS = {R.id.next_button, R.id.save_button, R.id.prev_button};
 
+        //array of possible options for a dream house
         private final DreamYou[] CHARACTER_PROFILES = {
                 new DreamYou("Hercules", R.drawable.hercules),
                 new DreamYou("Cool Guy", R.drawable.cool_guy),
@@ -49,13 +53,13 @@ final class DreamYou {
                 new DreamYou("Some Guy", R.drawable.someguy)
         };
 
-        private static int index = 0;
+        private static int index = 0;//to track character option in order to move from one to the next
 
         @Override
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_dream);
-            updateImage(getCurrentProfile());
+            updateImage(getCurrentProfile());//displays image
 
 
             for (int id : ACTION_ICON_IDS) {
@@ -63,6 +67,10 @@ final class DreamYou {
             }
         }
 
+        /**
+         * this method gives functionality to the buttons displayed on the screen
+         * @param view links to the dream character view
+         */
         @Override
         public void onClick(View view) {
             int id = view.getId();
@@ -78,6 +86,7 @@ final class DreamYou {
             } else Log.d(TAG, "Unknown ID: " + id);
         }
 
+        //gives menu functionality to flip between screens
         public boolean onOptionsItemSelected(MenuItem item) {
             Class changedClass = this.getClass();
             int menuId = item.getItemId();
@@ -113,11 +122,13 @@ final class DreamYou {
             return true;
         }
 
+        //updates screen to show a given Dream character
         private void updateImage(DreamYou dreamYou) {
             ImageView youImage = findViewById(R.id.image_preview);
             youImage.setImageResource(dreamYou.getProfileImageID());
         }
 
+        //the following three methods allow the user to move between assets or select the displayed asset
         private DreamYou moveToNextProfile()
         {
             index= (index + 1) % CHARACTER_PROFILES.length;

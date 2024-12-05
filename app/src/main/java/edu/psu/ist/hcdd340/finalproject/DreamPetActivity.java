@@ -15,14 +15,17 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 
 final class DreamPet {
+    //fields
     private final String petName;
     private final int petImageID;
 
+    //constructor
     DreamPet(String petName, int petImageID) {
         this.petName = petName;
         this.petImageID = petImageID;
     }
 
+    //getters
     public int getPetImageID() {
         return petImageID;
     }
@@ -42,7 +45,7 @@ final class DreamPet {
                         R.id.next_button,
                         R.id.next_button
                 };
-
+        //array of possible options for a dream pet
         private final DreamPet[] PET_PROFILES = {
                 new DreamPet("Dog", R.drawable.dog),
                 new DreamPet("Gray Cat", R.drawable.graycat),
@@ -51,7 +54,7 @@ final class DreamPet {
                 new DreamPet("Squirrel", R.drawable.squirrel)
         };
 
-        private int index = 0;
+        private int index = 0;//to track pet option in order to move from one to the next
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +75,16 @@ final class DreamPet {
             return true;
         }
 
-        //updates screen to show a given DreamHouse
+        //updates screen to show a given Dream Pet
         private void updateImage(DreamPet dreamPet) {
             ImageView img = findViewById(R.id.image_preview);
             img.setImageResource(dreamPet.getPetImageID());
         }
 
+        /**
+         * this method gives functionality to the buttons displayed on the screen
+         * @param view links to the dream pet view
+         */
         @Override
         public void onClick(View view) {
             int id = view.getId();
@@ -93,7 +100,7 @@ final class DreamPet {
             } else Log.d(TAG, "Unknown ID: " + id);
         }
 
-
+        //gives menu functionality to flip between screens
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             Class changedClass = this.getClass();
@@ -123,6 +130,8 @@ final class DreamPet {
             return true;
         }
 
+
+        //the following three methods allow the user to move between assets or select the displayed asset
         private DreamPet moveToNextProfile() {
             index = (index + 1) % PET_PROFILES.length;
             return PET_PROFILES[index];

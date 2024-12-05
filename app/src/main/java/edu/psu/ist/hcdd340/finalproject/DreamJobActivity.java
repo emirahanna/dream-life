@@ -15,14 +15,18 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 
 final class JobProfile {
+    //fields
     private final String JobName;
     private final int jobImageID;
 
+
+    //constructor
     JobProfile(String jobName, int jobImageID) {
         this.JobName = jobName;
         this.jobImageID = jobImageID;
     }
 
+    //getters
     public int getJobImageID() {
         return jobImageID;
     }
@@ -39,8 +43,8 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
 
     private final int[] ACTION_ICON_IDS = {R.id.prev_button, R.id.next_button, R.id.next_button};
 
+    //array of possible options for a dream job
     private final JobProfile[] JOB_PROFILES = {
-            //fill in once assets are input
 
             new JobProfile("Lawyer", R.drawable.gavel),
             new JobProfile("Doctor", R.drawable.stethoscope),
@@ -48,19 +52,23 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
             new JobProfile("Fireman", R.drawable.firetruck)
         };
 
-    private static int index = 0;
+    private static int index = 0;//to track job option in order to move from one to the next
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dream);//have to make this an xml file and then itll be fine
+        setContentView(R.layout.activity_dream);
+        updateImage(getCurrentProfile());//displays image
 
         //Set event handler for icons
         for (int id : ACTION_ICON_IDS) {
             findViewById(id).setOnClickListener(this);
         }
     }
-
+    /**
+     * this method gives functionality to the buttons displayed on the screen
+     * @param view links to the dream job view
+     */
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -82,12 +90,13 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         return true;
     }
 
-    //updates screen to show a given DreamHouse
+    //updates screen to show a given Dream Job
     private void updateImage(JobProfile jobProfile) {
         ImageView img = findViewById(R.id.image_preview);
         img.setImageResource(jobProfile.getJobImageID());
     }
 
+    //gives menu functionality to flip between screens
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Class changedClass = this.getClass();
@@ -117,6 +126,7 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         return true;
     }
 
+    //the following three methods allow the user to move between assets or select the displayed asset
     private JobProfile moveToNextProfile() {
         index = (index + 1) % JOB_PROFILES.length;
         return JOB_PROFILES[index];

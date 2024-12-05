@@ -15,14 +15,17 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 
 final class DreamHouse {
+    //fields
     private final String houseName;
     private final int houseImageId;
 
+    //constructor
     public DreamHouse(String houseName, int houseImageId) {
         this.houseName = houseName;
         this.houseImageId = houseImageId;
     }
 
+    //getters
     public String getHouseName() {
         return houseName;
     }
@@ -41,13 +44,13 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
 
     private static final int[] ACTION_ICON_IDS = {R.id.next_button, R.id.save_button, R.id.prev_button};
 
-    private static int index = 0;
+    private static int index = 0;//to track house option in order to move from one to the next
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dream);
-        updateImage(getCurrentProfile());
+        updateImage(getCurrentProfile()); //displays image
 
         //attach action listeners to buttons
         for (int id : ACTION_ICON_IDS) {
@@ -67,6 +70,10 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         img.setImageResource(dreamHouse.getHouseImageId());
     }
 
+    /**
+     * this method gives functionality to the buttons displayed on the screen
+     * @param view links to the dream house view
+     */
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -82,6 +89,7 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         } else Log.d(TAG, "Unknown ID: " + id);
     }
 
+    //gives menu functionality to flip between screens
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Class changedClass = this.getClass();
@@ -111,6 +119,8 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         return true;
     }
 
+
+    //the following three methods allow the user to move between assets or select the displayed asset
     private DreamHouse moveToNextProfile() {
         index = (index + 1) % DREAM_HOUSES.length;
         return DREAM_HOUSES[index];
