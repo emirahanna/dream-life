@@ -10,6 +10,7 @@
     <string name="menu_pet">Pet</string>
     <string name="menu_logout">Log Out</string>
     <string name="menu_you">You</string>
+    <string name="menu_vision">Vision Board</string>
 
     <string name="welcome_message">Welcome to Dream Life</string>
     <string name="login_page">Login with email and password. Or click register to get started</string>

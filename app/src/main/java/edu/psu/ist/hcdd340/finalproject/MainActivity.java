@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             changedClass = DreamYouActivity.class;
         } else if (menuId == R.id.menu_register) {
             changedClass = RegisterActivity.class;
+        } else if (menuId == R.id.menu_vision){
+            changedClass = RegisterActivity.class;
         }
 
         createIntentAndStartActivity(this, changedClass);

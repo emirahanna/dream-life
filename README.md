@@ -12,3 +12,6 @@ choices. Once the save button is clicked, their option will be saved to their ac
 Speaking of persistent data, our app begins with a register page. Here, an individual can
 create an account to save their choices. If the user chooses to log out, they can 
 log back in using the same email and password that they registered with.
+
+For the vision board page, we used the help of chatgpt to format the page and make it dynamically
+adjust the images to coincide with the choices that the user made. https://chatgpt.com/share/675897bf-426c-8011-8a91-38915e9ed4d1

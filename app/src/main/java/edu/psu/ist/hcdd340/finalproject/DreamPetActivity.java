@@ -2,6 +2,7 @@ package edu.psu.ist.hcdd340.finalproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -116,6 +117,21 @@ final class DreamPet {
                         R.string.save_confirmation,
                         Snackbar.LENGTH_SHORT).show();
             } else Log.d(TAG, "Unknown ID: " + id);
+        }
+
+        //saves currently selected profile
+        private void saveCurrentProfile(){
+            DreamPet currentProfile = getCurrentProfile();
+
+            SharedPreferences sharedPreferences = getSharedPreferences("UserSelections", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            //save the profile's name and image ID
+            editor.putString("selfProfileName", currentProfile.getPetName());
+            editor.putInt("selfProfileImageID", currentProfile.getPetImageID());
+            editor.apply();
+
+            Log.d(TAG, "Profile saved: " + currentProfile.getPetName());
         }
 
         //gives menu functionality to flip between screens

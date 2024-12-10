@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <solid android:color="#FFFFFF" /> <!-- White background inside the circle -->
+        <stroke
+            android:width="2dp"
+            android:color="#4A235A" /> <!-- Purple border -->
+        <corners android:radius="50dp" /> <!-- Circular corners -->
+    </shape>
+
+</selector>

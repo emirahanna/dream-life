@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6CCFF"> <!-- Light purple background -->
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvVisionBoardTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Dream Life"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#4A235A"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp" />
+
+    <!-- First Image -->
+    <ImageView
+        android:id="@+id/ivSelf"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_shape"
+        app:layout_constraintTop_toBottomOf="@id/tvVisionBoardTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Second Image -->
+    <ImageView
+        android:id="@+id/ivHome"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_shape"
+        app:layout_constraintTop_toBottomOf="@id/ivSelf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Third Image -->
+    <ImageView
+        android:id="@+id/ivJob"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_shape"
+        app:layout_constraintTop_toBottomOf="@id/ivHome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Fourth Image -->
+    <ImageView
+        android:id="@+id/ivPet"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_shape"
+        app:layout_constraintTop_toBottomOf="@id/ivJob"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
