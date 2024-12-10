@@ -96,6 +96,7 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
             updateName(previousProfile);
 
         } else if (id == R.id.save_button) {
+            SharedPreferences sharedPreferences = getSharedPreferences("UserSelections", MODE_PRIVATE);
             ShapeableImageView icon = findViewById(R.id.save_button);
             Snackbar.make(icon,
                     R.string.save_confirmation,
