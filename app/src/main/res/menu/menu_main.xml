@@ -22,12 +22,12 @@
         android:title="@string/menu_pet"
         app:showAsAction="never" />
     <item
+        android:id="@+id/menu_vision"
+        android:title="@string/menu_vision"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menu_logout"
         android:title="@string/menu_logout"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/menu_vision"
-        android:title="@string/menu_vision"
-        app:showAsAction="never" />
 </menu>

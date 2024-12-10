@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (id == R.id.prev_button) {
             showDreamHouse(moveToPreviousProfile());
         } else if (id == R.id.save_button) {
-            Log.d("FUCK", "saves it: " + id);
-        } else Log.d("FUCK", "Unknown ID: " + id);
+            Log.d("Issue", "saves it: " + id);
+        } else Log.d("Issue", "Unknown ID: " + id);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             changedClass = DreamPetActivity.class;
         } else if (menuId == R.id.menu_you) {
             changedClass = DreamYouActivity.class;
-        } else if (menuId == R.id.menu_register) {
-            changedClass = RegisterActivity.class;
-        } else if (menuId == R.id.menu_vision){
+        } else if (menuId == R.id.menu_vision) {
+            changedClass = VisionBoardActivity.class;
+        } else if (menuId == R.id.menu_register){
             changedClass = RegisterActivity.class;
         }
 

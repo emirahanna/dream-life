@@ -150,6 +150,8 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
             changedClass = RegisterActivity.class;
         }else if (menuId == R.id.menu_logout) {
             changedClass = LogInActivity.class;
+        }else if (menuId == R.id.menu_vision){
+            changedClass = VisionBoardActivity.class;
         }
 
         createIntentAndStartActivity(this, changedClass);
