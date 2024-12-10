@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class VisionBoardActivity extends AppCompatActivity {
@@ -18,22 +21,44 @@ public class VisionBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visionboard);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserSelections", MODE_PRIVATE);
-
-        int selfImageResId = sharedPreferences.getInt("selfProfileImageID", R.drawable.avtr);
-        int homeImageResId = sharedPreferences.getInt("homeImageID", R.drawable.avtr);
-        int jobImageResId = sharedPreferences.getInt("jobImageID", R.drawable.avtr);
-        int petImageResId = sharedPreferences.getInt("petImageID", R.drawable.avtr);
-
         ImageView ivSelf = findViewById(R.id.ivSelf);
         ImageView ivHome = findViewById(R.id.ivHome);
         ImageView ivJob = findViewById(R.id.ivJob);
         ImageView ivPet = findViewById(R.id.ivPet);
 
-        ivSelf.setImageResource(selfImageResId);
-        ivHome.setImageResource(homeImageResId);
-        ivJob.setImageResource(jobImageResId);
-        ivPet.setImageResource(petImageResId);
+        Button btnClear = findViewById(R.id.btnClear);
+
+        btnClear.setOnClickListener(v ->{
+            int defaultAvatar = R.drawable.avtr;
+
+            ivSelf.setImageResource(defaultAvatar);
+            ivHome.setImageResource(defaultAvatar);
+            ivJob.setImageResource(defaultAvatar);
+            ivPet.setImageResource(defaultAvatar);
+
+            SharedPreferences sharedPreferences = getSharedPreferences("UserSelection", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            editor.remove("selfProfileImageID");
+            editor.remove("homeImageID");
+            editor.remove("jobImageID");
+            editor.remove("petImageID");
+            editor.apply();
+
+            Snackbar.make(v, "All selections cleared!", Snackbar.LENGTH_SHORT).show();
+        });
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserSelections", MODE_PRIVATE);
+
+        int selfImageId = sharedPreferences.getInt("selfProfileImageID", R.drawable.avtr);
+        int homeImageId = sharedPreferences.getInt("houseImageID", R.drawable.avtr);
+        int jobImageId = sharedPreferences.getInt("jobImageID", R.drawable.avtr);
+        int petImageId = sharedPreferences.getInt("petImageID", R.drawable.avtr);
+
+        ivSelf.setImageResource(selfImageId);
+        ivHome.setImageResource(homeImageId);
+        ivJob.setImageResource(jobImageId);
+        ivPet.setImageResource(petImageId);
 
     }
 

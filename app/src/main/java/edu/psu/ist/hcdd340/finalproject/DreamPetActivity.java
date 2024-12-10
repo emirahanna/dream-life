@@ -128,8 +128,8 @@ final class DreamPet {
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             //save the profile's name and image ID
-            editor.putString("selfProfileName", currentProfile.getPetName());
-            editor.putInt("selfProfileImageID", currentProfile.getPetImageID());
+            editor.putString("petName", currentProfile.getPetName());
+            editor.putInt("petImageID", currentProfile.getPetImageID());
             editor.apply();
 
             Log.d(TAG, "Profile saved: " + currentProfile.getPetName());

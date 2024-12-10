@@ -112,8 +112,8 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //save the profile's name and image ID
-        editor.putString("selfProfileName", currentProfile.getJobName());
-        editor.putInt("selfProfileImageID", currentProfile.getJobImageID());
+        editor.putString("jobName", currentProfile.getJobName());
+        editor.putInt("jobImageID", currentProfile.getJobImageID());
         editor.apply();
 
         Log.d(TAG, "Profile saved: " + currentProfile.getJobName());

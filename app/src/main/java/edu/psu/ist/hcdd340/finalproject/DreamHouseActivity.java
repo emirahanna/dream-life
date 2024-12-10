@@ -32,7 +32,7 @@ final class DreamHouse {
         return houseName;
     }
 
-    public int getHouseImageId() {
+    public int getHouseImageID() {
         return houseImageId;
     }
 }
@@ -82,7 +82,7 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
     //updates screen to show a given DreamHouse
     private void updateImage(DreamHouse dreamHouse) {
         ImageView img = findViewById(R.id.image_preview);
-        img.setImageResource(dreamHouse.getHouseImageId());
+        img.setImageResource(dreamHouse.getHouseImageID());
     }
 
     /**
@@ -119,8 +119,8 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //save the profile's name and image ID
-        editor.putString("selfProfileName", currentProfile.getHouseName());
-        editor.putInt("selfProfileImageID", currentProfile.getHouseImageId());
+        editor.putString("houseName", currentProfile.getHouseName());
+        editor.putInt("houseImageID", currentProfile.getHouseImageID());
         editor.apply();
 
         Log.d(TAG, "Profile saved: " + currentProfile.getHouseName());

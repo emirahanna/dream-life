@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //updates screen to show a given DreamHouse
     private void showDreamHouse(DreamHouse dreamHouse) {
         ImageView houseImage = findViewById(R.id.image_preview);
-        houseImage.setImageResource(dreamHouse.getHouseImageId());
+        houseImage.setImageResource(dreamHouse.getHouseImageID());
 
     }
 
