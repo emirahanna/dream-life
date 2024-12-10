@@ -103,7 +103,7 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
             updateName(previousProfile);
 
         } else if (id == R.id.save_button) {
-            SharedPreferences sharedPreferences = getSharedPreferences("UserSelections", MODE_PRIVATE);
+            saveCurrentProfile();
             ShapeableImageView icon = findViewById(R.id.save_button);
             Snackbar.make(icon,
                     R.string.save_confirmation,
