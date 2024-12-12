@@ -7,6 +7,19 @@
     android:padding="16dp"
     android:background="#E6CCFF"> <!-- Light purple background -->
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/corkboard"
+        android:padding="16dp">
+
+
+    </RelativeLayout>
+
     <!-- Back Button -->
     <ImageButton
         android:id="@+id/backButton"
@@ -49,12 +62,6 @@
         android:text="Date: 12/12/2024"
         android:textSize="14sp"/>
 
-    <!-- Image View 1 -->
-
-    <!-- Image View 2 -->
-
-    <!-- Image View 3 -->
-
     <ImageView
         android:id="@+id/imageViewSelf"
         android:layout_width="150dp"
@@ -62,11 +69,8 @@
         android:layout_below="@id/dateText"
         android:layout_alignParentStart="true"
         android:layout_marginStart="66dp"
-        android:layout_marginTop="112dp" />
-
-    <!-- Image View 4 -->
-
-    <!-- Clear Button -->
+        android:layout_marginTop="112dp"
+        android:background="@drawable/image_border" />
 
     <ImageView
         android:id="@+id/imageViewHome"
@@ -75,7 +79,8 @@
         android:layout_below="@id/dateText"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="74dp"
-        android:layout_marginEnd="56dp" />
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/image_border" />
 
     <ImageView
         android:id="@+id/imageViewJob"
@@ -84,7 +89,8 @@
         android:layout_below="@id/imageViewSelf"
         android:layout_alignParentStart="true"
         android:layout_marginStart="87dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:background="@drawable/image_border"  />
 
     <ImageView
         android:id="@+id/imageViewPet"
@@ -93,7 +99,8 @@
         android:layout_below="@id/imageViewHome"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="6dp"
-        android:layout_marginEnd="43dp" />
+        android:layout_marginEnd="43dp"
+        android:background="@drawable/image_border" />
 
     <Button
         android:id="@+id/buttonClear"
