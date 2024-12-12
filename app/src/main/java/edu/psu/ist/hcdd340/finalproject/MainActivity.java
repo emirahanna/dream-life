@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dream);
+        setContentView(R.layout.activity_main);
         showDreamHouse(getCurrentProfile());
 
         //attach action listeners to buttons
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             findViewById(id).setOnClickListener(this);
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

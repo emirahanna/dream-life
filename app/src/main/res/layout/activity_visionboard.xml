@@ -1,83 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     android:background="#E6CCFF"> <!-- Light purple background -->
+
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="Back Button"
+        android:background="@null"/>
+
+    <!-- History Icon -->
+    <ImageButton
+        android:id="@+id/historyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="History Icon"
+        android:background="@null"/>
 
     <!-- Title -->
     <TextView
-        android:id="@+id/tvVisionBoardTitle"
+        android:id="@+id/visionBoardTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Dream Life"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="My Vision Board"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#4A235A"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="16dp" />
+        android:textStyle="bold"/>
 
-    <!-- First Image -->
-    <ImageView
-        android:id="@+id/ivSelf"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/circle_shape"
-        app:layout_constraintTop_toBottomOf="@id/tvVisionBoardTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Date Text -->
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/visionBoardTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Date: 12/12/2024"
+        android:textSize="14sp"/>
 
-    <!-- Second Image -->
-    <ImageView
-        android:id="@+id/ivHome"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/circle_shape"
-        app:layout_constraintTop_toBottomOf="@id/ivSelf"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Image View 1 -->
 
-    <!-- Third Image -->
-    <ImageView
-        android:id="@+id/ivJob"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/circle_shape"
-        app:layout_constraintTop_toBottomOf="@id/ivHome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Image View 2 -->
 
-    <!-- Fourth Image -->
+    <!-- Image View 3 -->
+
     <ImageView
-        android:id="@+id/ivPet"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/circle_shape"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivJob" />
+        android:id="@+id/imageViewSelf"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/dateText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="112dp" />
+
+    <!-- Image View 4 -->
+
+    <!-- Clear Button -->
+
+    <ImageView
+        android:id="@+id/imageViewHome"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/dateText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="56dp" />
+
+    <ImageView
+        android:id="@+id/imageViewJob"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/imageViewSelf"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:id="@+id/imageViewPet"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/imageViewHome"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="43dp" />
 
     <Button
-        android:id="@+id/btnClear"
+        android:id="@+id/buttonClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Clear"
-        android:backgroundTint="#4A235A"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:text="Clear"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

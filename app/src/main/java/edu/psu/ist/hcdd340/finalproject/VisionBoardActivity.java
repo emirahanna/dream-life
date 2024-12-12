@@ -21,12 +21,12 @@ public class VisionBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visionboard);
 
-        ImageView ivSelf = findViewById(R.id.ivSelf);
-        ImageView ivHome = findViewById(R.id.ivHome);
-        ImageView ivJob = findViewById(R.id.ivJob);
-        ImageView ivPet = findViewById(R.id.ivPet);
+        ImageView ivSelf = findViewById(R.id.imageViewSelf);
+        ImageView ivHome = findViewById(R.id.imageViewHome);
+        ImageView ivJob = findViewById(R.id.imageViewJob);
+        ImageView ivPet = findViewById(R.id.imageViewPet);
 
-        Button btnClear = findViewById(R.id.btnClear);
+        Button btnClear = findViewById(R.id.buttonClear);
 
         btnClear.setOnClickListener(v ->{
             int defaultAvatar = R.drawable.avtr;
