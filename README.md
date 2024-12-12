@@ -14,4 +14,4 @@ create an account to save their choices. If the user chooses to log out, they ca
 log back in using the same email and password that they registered with.
 
 For the vision board page, we used the help of chatgpt to format the page and make it dynamically
-adjust the images to coincide with the choices that the user made. https://chatgpt.com/share/675897bf-426c-8011-8a91-38915e9ed4d1
+adjust the images to coincide with the choices that the user made. [See here](https://chatgpt.com/share/675897bf-426c-8011-8a91-38915e9ed4d1) 
