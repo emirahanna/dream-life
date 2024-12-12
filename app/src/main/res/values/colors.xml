@@ -14,5 +14,6 @@
     <color name="tertiary_color">#0D0628</color>
     <color name="accent_color_1">#CEF7A0</color>
     <color name="accent_color_2">#DBDFAC</color>
+    <color name="background_color">#E6CCFF</color>
 
 </resources>
