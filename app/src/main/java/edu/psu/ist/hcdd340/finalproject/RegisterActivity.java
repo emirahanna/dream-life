@@ -1,30 +1,22 @@
 package edu.psu.ist.hcdd340.finalproject;
 
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
 public class RegisterActivity extends AppCompatActivity  implements View.OnClickListener {
 
     private static final String TAG = "REGISTER_ACTIVITY";
-
-    public static final String SHARED_PREF_NAME = "PENN_STATE_ID";
-    public static final String EMAIL_KEY = "EMAIL";
-    public static final String PASSWORD_KEY = "PASSWORD";
-    public static final String FIRST_NAME_KEY = "FIRST_NAME";
-    public static final String LAST_NAME_KEY = "LAST_NAME";
-
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,39 +28,39 @@ public class RegisterActivity extends AppCompatActivity  implements View.OnClick
 
         Button cancelButton = findViewById(R.id.button_cancel_registration);
         cancelButton.setOnClickListener(this);
-
-        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        TextView signUpLink = findViewById(R.id.log_in_text_link);
+        signUpLink.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
-
-        String email = getInputFromEditText(R.id.editTextEmail);
-        String password = getInputFromEditText(R.id.editTextPassword);
-        String firstName = getInputFromEditText(R.id.editFirstName);
-        String lastName = getInputFromEditText(R.id.editLastName);
-
         int id = view.getId();
         if (id == R.id.button_cancel_registration) {
-            finishAffinity();
-        } else if (id == R.id.button_register && !email.isEmpty() && !password.isEmpty() &&
-        !firstName.isEmpty() && !lastName.isEmpty()) {
-            registerUser();
-            Button button = findViewById(R.id.button_register);
-            Snackbar.make(button,
-                    "Registered!",
-                    Snackbar.LENGTH_LONG).show();
-        }else if(id == R.id.button_register && email.isEmpty() || password.isEmpty() ||
-                firstName.isEmpty() || lastName.isEmpty())
-        {
-            AlertDialog.Builder d = new AlertDialog.Builder(this);
-            d.setTitle(R.string.login_error_title);
-            d.setMessage("Please be sure to fill out all information in order to Register.");
-            d.setPositiveButton(android.R.string.ok, null);
-            d.show();
-        }
+            finish();
+        } else if (id == R.id.button_register) {
+            if (validateInput()) {
+                registerUser();
+                Button button = findViewById(R.id.button_register);
+                Snackbar.make(button,
+                        "Registered!",
+                        Snackbar.LENGTH_LONG).show();
 
+                Intent intent = new Intent(this, DreamYouActivity.class);
+                startActivity(intent);
+            }
+            else{
+                AlertDialog.Builder d = new AlertDialog.Builder(this);
+                d.setTitle(R.string.register_error_title);
+                d.setMessage(R.string.register_error_message);
+                d.setPositiveButton(android.R.string.ok, null);
+                d.show();
+            }
+        }
+        else if (id == R.id.log_in_text_link){
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        }
     }
 
     /**
@@ -89,32 +81,34 @@ public class RegisterActivity extends AppCompatActivity  implements View.OnClick
     void registerUser() {
         String email = getInputFromEditText(R.id.editTextEmail);
         String password = getInputFromEditText(R.id.editTextPassword);
-        String firstName = getInputFromEditText(R.id.editFirstName);
-        String lastName = getInputFromEditText(R.id.editLastName);
+        String userName = getInputFromEditText(R.id.editFirstName);
 
+        UserManager userManager = new UserManager(this);
+        Button btn = findViewById(R.id.button_register);
 
-        Log.d(TAG, "Email: " + email + ", first name: " + firstName +
-                ", last name: " + lastName);
+        if (userManager.isUsernameTaken(userName)) {
+            Snackbar.make(btn, "Username already exists!", Snackbar.LENGTH_SHORT).show();
+        } else {
+            User newUser = new User(userName, password);
+            userManager.addUser(newUser);
+            Snackbar.make(btn, "User registered successfully!", Snackbar.LENGTH_SHORT).show();
+        }
 
-        saveUserInformation(email, password, firstName, lastName);
-
-        Intent intent = new Intent(this, DreamYouActivity.class);
-        startActivity(intent);
+        Log.d(TAG, "Email: " + email + ", first name: " + userName);
     }
 
     /**
-     * Saves user information using SharedPreferences
+     * Ensures that all text fields have been filled
+     * @return
      */
-    void saveUserInformation(String email, String password, String firstName,
-                             String lastName) {
+    boolean validateInput(){
+        String email = getInputFromEditText(R.id.editTextEmail);
+        String password = getInputFromEditText(R.id.editTextPassword);
+        String userName = getInputFromEditText(R.id.editFirstName);
 
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(EMAIL_KEY, email);
-        editor.putString(PASSWORD_KEY, password);
-        editor.putString(FIRST_NAME_KEY, firstName);
-        editor.putString(LAST_NAME_KEY, lastName);
-        editor.apply();
+        return !email.isEmpty() && !password.isEmpty() && !userName.isEmpty();
     }
+
 }
 
 

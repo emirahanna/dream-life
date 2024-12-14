@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Design Your Life!</string>
+    <string name="app_name">Dream Life</string>
 
     <string name="prev_button_title">Prev</string>
     <string name="next_button_title">Next</string>
@@ -13,23 +13,29 @@
     <string name="menu_vision">Vision Board</string>
 
     <string name="welcome_message">Welcome to Dream Life</string>
-    <string name="login_page">Login with email and password. Or click register to get started</string>
+    <string name="login_page">Login with username and password. Or click register to get started</string>
     <string name="email_label">Email:</string>
     <string name="password_label">Password:</string>
     <string name="login_button">LogIn</string>
     <string name="register_button">Register</string>
 
     <string name="email_hint">abc123@psu.edu</string>
-    <string name="last_name_hint">Last Name</string>
-    <string name="first_name_hint">First Name</string>
+    <string name="user_name_hint">username</string>
+    <string name="password_hint">password</string>
 
     <string name="menu_info">Info</string>
     <string name="menu_register">Register</string>
     <string name="menu_login">Log In</string>
     <string name="login_error_title">Unable to login</string>
-    <string name="login_error_message">Please retry using correct email and password.</string>
+    <string name="login_error_message">Please retry using correct username and password.</string>
+    <string name="register_error_title">Unable to Register</string>
+    <string name="register_error_message">Please fill out all fields</string>
     <string name="last_name_label">Last Name:</string>
-    <string name="first_name_label">First Name:</string>
+    <string name="user_name_label">Username:</string>
+    <string name="log_in_prompt">Already have an account?</string>
+    <string name="log_in_link"><u><b>Log in</b></u></string>
+    <string name="register_prompt">Don\'t have an account?</string>
+    <string name="register_link"><u><b>Sign up</b></u></string>
 
     <string name="save_confirmation">Selection Saved!</string>
 

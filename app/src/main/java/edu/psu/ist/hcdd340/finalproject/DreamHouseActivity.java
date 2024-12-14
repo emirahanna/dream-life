@@ -16,24 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 
-final class DreamHouse {
-    //fields
-    private final String houseName;
-    private final int houseImageId;
-
+final class DreamHouse extends DreamLifeOptions {
     //constructor
-    public DreamHouse(String houseName, int houseImageId) {
-        this.houseName = houseName;
-        this.houseImageId = houseImageId;
-    }
-
-    //getters
-    public String getHouseName() {
-        return houseName;
-    }
-
-    public int getHouseImageID() {
-        return houseImageId;
+    public DreamHouse(String name, int imageId) {
+        super(name, imageId);
     }
 }
 
@@ -82,7 +68,7 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
     //updates screen to show a given DreamHouse
     private void updateImage(DreamHouse dreamHouse) {
         ImageView img = findViewById(R.id.image_preview);
-        img.setImageResource(dreamHouse.getHouseImageID());
+        img.setImageResource(dreamHouse.getImageID());
     }
 
     /**
@@ -119,36 +105,19 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //save the profile's name and image ID
-        editor.putString("houseName", currentProfile.getHouseName());
-        editor.putInt("houseImageID", currentProfile.getHouseImageID());
+        editor.putString("houseName", currentProfile.getName());
+        editor.putInt("houseImageID", currentProfile.getImageID());
         editor.apply();
 
-        Log.d(TAG, "Profile saved: " + currentProfile.getHouseName());
+        Log.d(TAG, "Profile saved: " + currentProfile.getName());
     }
 
     //gives menu functionality to flip between screens
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Class changedClass = this.getClass();
         int menuId = item.getItemId();
 
-        if (menuId == R.id.menu_house) {
-            changedClass = DreamHouseActivity.class;
-        } else if (menuId == R.id.menu_ambition) {
-            changedClass = DreamJobActivity.class;
-        } else if (menuId == R.id.menu_pet) {
-            changedClass = DreamPetActivity.class;
-        } else if (menuId == R.id.menu_you) {
-            changedClass = DreamYouActivity.class;
-        } else if (menuId == R.id.menu_register) {
-            changedClass = RegisterActivity.class;
-        }else if (menuId == R.id.menu_logout) {
-            changedClass = LogInActivity.class;
-        }else if (menuId == R.id.menu_vision){
-            changedClass = VisionBoardActivity.class;
-        }
-
-        createIntentAndStartActivity(this, changedClass);
+        createIntentAndStartActivity(this, AppHelper.processItemsSelectedMainMenu(menuId, changedClass, this));
         return super.onOptionsItemSelected(item);
     }
 
@@ -174,7 +143,7 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
     private void updateName(DreamHouse profile)
     {
         TextView nameTextView = findViewById(R.id.nameText);
-        nameTextView.setText(profile.getHouseName());
+        nameTextView.setText(profile.getName());
     }
 
     private DreamHouse getCurrentProfile() {

@@ -1,104 +1,90 @@
 package edu.psu.ist.hcdd340.finalproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-    //Array of possible options for a dream house
-    private final DreamHouse[] DREAM_HOUSES = {new DreamHouse("Cloud Island", R.drawable.floatingisland), new DreamHouse("Night Watch House", R.drawable.nightwatchhouse), new DreamHouse("Hidden Island", R.drawable.hiddenisland), new DreamHouse("Barn", R.drawable.barnhouse)};
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-    private static final int[] ACTION_ICON_IDS = {R.id.next_button, R.id.save_button, R.id.prev_button};
+public class MainActivity extends AppCompatActivity {
 
-    private static int index = 0;
+
+    public static final String SHARED_PREF_NAME = "CURRENT_STATE";
+    private SharedPreferences sharedPreferences;
+    private TextView greetingTextView;
+    private TextView quoteTextView;
+    private TextView authorTextView;
+    private CardView quoteCard;
+    private CardView visionBoardCard;
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        showDreamHouse(getCurrentProfile());
-
-        //attach action listeners to buttons
-        for (int id : ACTION_ICON_IDS) {
-            findViewById(id).setOnClickListener(this);
-        }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    //updates screen to show a given DreamHouse
-    private void showDreamHouse(DreamHouse dreamHouse) {
-        ImageView houseImage = findViewById(R.id.image_preview);
-        houseImage.setImageResource(dreamHouse.getHouseImageID());
-
-    }
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        if ((id == R.id.next_button)) {
-            showDreamHouse(moveToNextProfile());
-        } else if (id == R.id.prev_button) {
-            showDreamHouse(moveToPreviousProfile());
-        } else if (id == R.id.save_button) {
-            Log.d("Issue", "saves it: " + id);
-        } else Log.d("Issue", "Unknown ID: " + id);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Class changedClass = this.getClass();
-        int menuId = item.getItemId();
-
-        if (menuId == R.id.menu_house) {
-            changedClass = DreamHouseActivity.class;
-        } else if (menuId == R.id.menu_ambition) {
-            changedClass = DreamJobActivity.class;
-        } else if (menuId == R.id.menu_pet) {
-            changedClass = DreamPetActivity.class;
-        } else if (menuId == R.id.menu_you) {
-            changedClass = DreamYouActivity.class;
-        } else if (menuId == R.id.menu_vision) {
-            changedClass = VisionBoardActivity.class;
-        } else if (menuId == R.id.menu_register){
-            changedClass = RegisterActivity.class;
+        sharedPreferences = this.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        //not logged in
+        if (!sharedPreferences.getBoolean(UserManager.CURRENT_STATE_KEY, false)) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        } else {
+            setContentView(R.layout.activity_main);
         }
 
-        createIntentAndStartActivity(this, changedClass);
-        return super.onOptionsItemSelected(item);
+        // Bind views
+        greetingTextView = findViewById(R.id.greetingTextView);
+        quoteTextView = findViewById(R.id.quoteTextView);
+        authorTextView = findViewById(R.id.authorTextView);
+        quoteCard = findViewById(R.id.quoteCard);
+        visionBoardCard = findViewById(R.id.visionBoardCard);
+
+        // Set the greeting (You can fetch the user's name dynamically)
+        String username = sharedPreferences.getString(UserManager.CURRENT_USER_KEY, "bestie");
+        greetingTextView.setText("Hello, " + username + "!");
+
+        // Set a random quote
+        String[] quotes = {
+                "“Dream big and dare to fail.”",
+                "“The future belongs to those who believe in the beauty of their dreams.”",
+                "“Success is not the key to happiness. Happiness is the key to success.”",
+                "“Believe you can and you're halfway there.”",
+                "“Don't watch the clock; do what it does. Keep going.”"
+        };
+        Random random = new Random();
+        String randomQuote = quotes[random.nextInt(quotes.length)];
+        quoteTextView.setText(randomQuote);
+
+
+        // Set click listener for Vision Board card
+        visionBoardCard.setOnClickListener(v -> {
+            Intent intent = new Intent(this, VisionBoardActivity.class);
+            startActivity(intent);
+        });
     }
 
-    private boolean createIntentAndStartActivity(Context context, Class cls) {
-        Intent intent = new Intent(context, cls);
-        startActivity(intent);
-        return true;
+    private String[] getRandomQuoteFromCSV() {
+        List<String[]> quotes = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("quotes.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] split = line.split(",", 2); // Split into quote and author
+                    quotes.add(split);
+            }
+        } catch (IOException e) {
+           // e.printStackTrace();
+        }
+
+            Random random = new Random();
+            return quotes.get(random.nextInt(quotes.size()));
     }
 
-
-    private DreamHouse moveToNextProfile() {
-        index = (index + 1) % DREAM_HOUSES.length;
-        return DREAM_HOUSES[index];
-    }
-
-    private DreamHouse moveToPreviousProfile() {
-        index = index - 1;
-        if (index < 0) index = DREAM_HOUSES.length - 1;
-        return DREAM_HOUSES[index];
-    }
-
-    private DreamHouse getCurrentProfile() {
-        return DREAM_HOUSES[index];
-    }
 }

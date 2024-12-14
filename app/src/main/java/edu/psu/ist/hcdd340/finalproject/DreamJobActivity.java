@@ -16,34 +16,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 
-final class DreamJob {
-    //fields
-    private final String JobName;
-    private final int jobImageID;
-
+final class DreamJob extends DreamLifeOptions {
 
     //constructor
-    DreamJob(String jobName, int jobImageID) {
-        this.JobName = jobName;
-        this.jobImageID = jobImageID;
+    public DreamJob(String name, int imageID) {
+        super(name, imageID);
     }
-
-    //getters
-    public int getJobImageID() {
-        return jobImageID;
-    }
-
-    public String getJobName() {
-        return JobName;
-    }
-
 }
 
 public class DreamJobActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "DREAM_LIFE_ACTIVITY";
     private TextView dynamicText;
-    private TextView nameText;
 
     private final int[] ACTION_ICON_IDS = {R.id.prev_button, R.id.next_button, R.id.next_button};
 
@@ -70,7 +54,7 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         dynamicText = findViewById(R.id.dynamicText);
         dynamicText.setText(getString(R.string.choose_job));
 
-        nameText = findViewById(R.id.nameText);
+        TextView nameText = findViewById(R.id.nameText);
         nameText.setText("Lawyer");
 
         //Set event handler for icons
@@ -112,11 +96,11 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //save the profile's name and image ID
-        editor.putString("jobName", currentProfile.getJobName());
-        editor.putInt("jobImageID", currentProfile.getJobImageID());
+        editor.putString("jobName", currentProfile.getName());
+        editor.putInt("jobImageID", currentProfile.getImageID());
         editor.apply();
 
-        Log.d(TAG, "Profile saved: " + currentProfile.getJobName());
+        Log.d(TAG, "Profile saved: " + currentProfile.getName());
     }
 
 
@@ -129,32 +113,15 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
     //updates screen to show a given Dream Job
     private void updateImage(DreamJob jobProfile) {
         ImageView img = findViewById(R.id.image_preview);
-        img.setImageResource(jobProfile.getJobImageID());
+        img.setImageResource(jobProfile.getImageID());
     }
 
     //gives menu functionality to flip between screens
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Class changedClass = this.getClass();
+        Class<? extends DreamJobActivity> changedClass = this.getClass();
         int menuId = item.getItemId();
 
-        if (menuId == R.id.menu_house) {
-            changedClass = DreamHouseActivity.class;
-        } else if (menuId == R.id.menu_ambition) {
-            changedClass = DreamJobActivity.class;
-        } else if (menuId == R.id.menu_pet) {
-            changedClass = DreamPetActivity.class;
-        } else if (menuId == R.id.menu_you) {
-            changedClass = DreamYouActivity.class;
-        } else if (menuId == R.id.menu_register) {
-            changedClass = RegisterActivity.class;
-        }else if (menuId == R.id.menu_logout) {
-            changedClass = LogInActivity.class;
-        }else if (menuId == R.id.menu_vision){
-            changedClass = VisionBoardActivity.class;
-        }
-
-        createIntentAndStartActivity(this, changedClass);
+        createIntentAndStartActivity(this, AppHelper.processItemsSelectedMainMenu(menuId, changedClass, this));
         return super.onOptionsItemSelected(item);
     }
 
@@ -179,7 +146,7 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
     private void updateName(DreamJob profile)
     {
         TextView nameTextView = findViewById(R.id.nameText);
-        nameTextView.setText(profile.getJobName());
+        nameTextView.setText(profile.getName());
     }
 
     private DreamJob getCurrentProfile() {
