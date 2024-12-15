@@ -39,6 +39,12 @@
 
     <string name="save_confirmation">Selection Saved!</string>
 
+    <string name="home_page_greeting"><b>Welcome back,\n</b>User!</string>
+    <string name="home_page_header">Time to Start Dreaming</string>
+    <string name="create_dream_life_text">Create Dream Life</string>
+    <string name="view_vision_board_text">View Vision Boards</string>
+    <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </string>
+
     //dynamic text options
     <string name= "choose_character">Choose Your Character</string>
     <string name= "choose_house">Choose Your House</string>
