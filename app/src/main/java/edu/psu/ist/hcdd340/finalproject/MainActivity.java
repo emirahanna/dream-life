@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -27,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
         if (!sharedPreferences.getBoolean(UserManager.CURRENT_STATE_KEY, false)) {
             Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
-        } else {
-            setContentView(R.layout.activity_main);
+            finish();
         }
+            setContentView(R.layout.activity_main);
+
 
         // Bind views
         TextView greetingTextView = findViewById(R.id.greetingTextView);
@@ -47,13 +49,17 @@ public class MainActivity extends AppCompatActivity {
         quoteTextView.setText(getRandomQuote());
 
         // Set button functionality (using lambdas!!!) Love this for us
-        visionBoardCard.setOnClickListener(e -> createIntentAndStartActivity(this, VisionBoardActivity.class));
-        quoteCard.setOnClickListener(e-> quoteTextView.setText(getRandomQuote()));
-        dreamsLifeCard.setOnClickListener(e ->
-                createIntentAndStartActivity(this, DreamYouActivity.class));
+        visionBoardCard.setOnClickListener(e -> {
+
+            createIntentAndStartActivity(this, VisionBoardActivity.class);
+        });
+        quoteCard.setOnClickListener(e -> quoteTextView.setText(getRandomQuote()));
+        dreamsLifeCard.setOnClickListener(e -> {
+            Log.v("FUCK", "Button clicked");
+            createIntentAndStartActivity(this, DreamYouActivity.class);});
     }
 
-    private String getRandomQuote(){
+    private String getRandomQuote() {
         String[] quotes = {"Do it for your future self.", "You’re not behind in life. There’s no timeline.", "Small progress is still progress.", "You have survived 100% of your bad days.", "Your vibe attracts your tribe.", "Dream big, start small, but most importantly, start.", "Be the energy you want to attract.", "Sometimes, what didn't work out for you really worked out for you.", "Focus on the step in front of you, not the whole staircase.", "The universe is not in a hurry. You are.", "Take a deep breath and remind yourself of who you are.", "You are allowed to be both a masterpiece and a work in progress.", "Growth is growth, no matter how small.", "Don’t just exist; live.", "Everything you want is on the other side of fear.", "Trust the timing of your life.", "Do what you can, with what you have, where you are.", "Protect your peace.", "Your potential is endless.", "Be the reason someone believes in the goodness of people.", "What is coming is better than what is gone.", "Even the darkest night will end, and the sun will rise.", "You are braver than you believe and stronger than you seem.", "Keep shining; the world needs your light.", "One day or day one. You decide.", "Your journey is not the same as anyone else’s.", "Bloom where you are planted.", "It’s not too late to start over.", "You’re allowed to take up space."};
         Random random = new Random();
         return quotes[random.nextInt(quotes.length)];

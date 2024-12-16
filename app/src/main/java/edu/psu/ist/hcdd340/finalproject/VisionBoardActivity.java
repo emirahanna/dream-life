@@ -6,43 +6,19 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.Date;
-
-final class VisionBoard{
-    private String userName;
-    private String date;
-    private String vbTitle;
-    private Date createdOn;
-    private DreamHouse dreamHouse;
-    private DreamJob dreamJob;
-    private DreamYou dreamYou;
-    private DreamPet dreamPet;
-
-    public VisionBoard(String userName, String date, String vbTitle, Date createdOn, DreamHouse dreamHouse, DreamJob dreamJob, DreamYou dreamYou, DreamPet dreamPet) {
-        this.userName = userName;
-        this.date = date;
-        this.vbTitle = vbTitle;
-        this.createdOn = createdOn;
-        this.dreamHouse = dreamHouse;
-        this.dreamJob = dreamJob;
-        this.dreamYou = dreamYou;
-        this.dreamPet = dreamPet;
-    }
-}
+import java.util.List;
 
 public class VisionBoardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visionboard);
+
 
 //        ImageView ivSelf = findViewById(R.id.ivSelf);
 //        ImageView ivHome = findViewById(R.id.ivHome);
@@ -83,7 +59,27 @@ public class VisionBoardActivity extends AppCompatActivity {
 //        ivJob.setImageResource(jobImageId);
 //        ivPet.setImageResource(petImageId);
 
+//        setContentView(R.layout.activity_visionboard);
+        setContentView(R.layout.activity_visionboard_recycler_view);
+
+        VisionBoardManager vbManager = new VisionBoardManager(this);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Get vision boards for the current user
+        String currentUserName = getCurrentUserName();
+        List<VisionBoard> visionBoards = vbManager.getVisionBoards(currentUserName);
+
+        // Set up the adapter
+        VisionBoardAdapter adapter = new VisionBoardAdapter(visionBoards);
+        recyclerView.setAdapter(adapter);
     }
+
+    private String getCurrentUserName() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences(MainActivity.SHARED_PREF_NAME, MODE_PRIVATE);
+        return sharedPreferences.getString(UserManager.CURRENT_USER_KEY, "bestie");
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

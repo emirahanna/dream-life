@@ -8,12 +8,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 
 final class DreamHouse extends DreamLifeOptions {
@@ -28,16 +32,12 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
     public static final String TAG = "DREAM_HOUSE_ACTIVITY";
 
     //Array of possible options for a dream house
-    private final DreamHouse[] DREAM_HOUSES = {
-            new DreamHouse("Cloud Island", R.drawable.floatingisland),
-            new DreamHouse("Night Watch House", R.drawable.nightwatchhouse),
-            new DreamHouse("Hidden Island", R.drawable.hiddenisland),
-            new DreamHouse("Barn", R.drawable.barnhouse)};
+    private final DreamHouse[] DREAM_HOUSES = {new DreamHouse("Cloud Island", R.drawable.floatingisland), new DreamHouse("Night Watch House", R.drawable.nightwatchhouse), new DreamHouse("Hidden Island", R.drawable.hiddenisland), new DreamHouse("Barn", R.drawable.barnhouse)};
 
-    private static final int[] ACTION_ICON_IDS = {R.id.next_button, R.id.save_button, R.id.prev_button};
+    private static final int[] ACTION_ICON_IDS = {R.id.next_button, R.id.save_button, R.id.prev_button, R.id.createVisionBoardButton};
 
     private TextView dynamicText;
-    private TextView nameText;
+    private Spinner spinner;
 
     private static int index = 0;//to track house option in order to move from one to the next
 
@@ -50,13 +50,42 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         dynamicText = findViewById(R.id.dynamicText);
         dynamicText.setText(getString(R.string.choose_house));
 
-        nameText = findViewById(R.id.nameText);
-        nameText.setText("Cloud Island");
+//        nameText = findViewById(R.id.nameText);
+//        nameText.setText("Cloud Island");
 
         //attach action listeners to buttons
         for (int id : ACTION_ICON_IDS) {
             findViewById(id).setOnClickListener(this);
         }
+        setUpSpinner();
+    }
+
+    private void setUpSpinner() {
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.house_array, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner = findViewById(R.id.character_options_spinner);
+        spinner.setAdapter(adapter);
+
+        // Set the OnItemSelectedListener
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Get the selected item
+                // Fetch the selected DreamYou object using the position
+                DreamHouse selectedDreamYou = DREAM_HOUSES[position];
+
+                // Update the image based on the selected item
+                updateImage(selectedDreamYou);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
     }
 
     @Override
@@ -73,6 +102,7 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
 
     /**
      * this method gives functionality to the buttons displayed on the screen
+     *
      * @param view links to the dream house view
      */
     @Override
@@ -81,32 +111,44 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         if ((id == R.id.next_button)) {
             DreamHouse nextProfile = moveToNextProfile();
             updateImage(nextProfile);
-            updateName(nextProfile);
+            updateName();
 
         } else if (id == R.id.prev_button) {
             DreamHouse previousProfile = moveToPreviousProfile();
             updateImage(previousProfile);
-            updateName(previousProfile);
+            updateName();
 
         } else if (id == R.id.save_button) {
             saveCurrentProfile();
-            ShapeableImageView icon = findViewById(R.id.save_button);
-            Snackbar.make(icon,
-                    R.string.save_confirmation,
-                    Snackbar.LENGTH_SHORT).show();
+            Button icon = findViewById(R.id.createVisionBoardButton);
+            Snackbar.make(icon, R.string.save_confirmation, Snackbar.LENGTH_SHORT).show();
+        } else if (id == R.id.createVisionBoardButton) {
+            VisionBoardManager vbManager = new VisionBoardManager(this);
+            if (vbManager.canCreateVisionBoard()) {
+                vbManager.saveVisionBoard();
+                Button icon = findViewById(R.id.createVisionBoardButton);
+                Snackbar.make(icon, R.string.vb_saved, Snackbar.LENGTH_SHORT).show();
+            } else {
+                AlertDialog.Builder d = new AlertDialog.Builder(this);
+                d.setTitle("Incomplete information");
+                d.setMessage("Please select a Job, House, Pet and Character to create vision board");
+                d.setPositiveButton(android.R.string.ok, null);
+                d.show();
+            }
         } else Log.d(TAG, "Unknown ID: " + id);
     }
 
+
     //saves currently selected profile
-    private void saveCurrentProfile(){
+    private void saveCurrentProfile() {
         DreamHouse currentProfile = getCurrentProfile();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserSelections", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREF_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //save the profile's name and image ID
-        editor.putString("houseName", currentProfile.getName());
-        editor.putInt("houseImageID", currentProfile.getImageID());
+        editor.putString("house_name", currentProfile.getName());
+        editor.putInt("house_image_ID", currentProfile.getImageID());
         editor.apply();
 
         Log.d(TAG, "Profile saved: " + currentProfile.getName());
@@ -140,10 +182,8 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
         return DREAM_HOUSES[index];
     }
 
-    private void updateName(DreamHouse profile)
-    {
-        TextView nameTextView = findViewById(R.id.nameText);
-        nameTextView.setText(profile.getName());
+    private void updateName() {
+        spinner.setSelection(index);
     }
 
     private DreamHouse getCurrentProfile() {

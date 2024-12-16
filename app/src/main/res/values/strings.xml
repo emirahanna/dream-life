@@ -45,16 +45,43 @@
     <string name="view_vision_board_text">View Vision Boards</string>
     <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </string>
 
+    <string name="vb_saved">Vision board saved!</string>
     //dynamic text options
     <string name= "choose_character">Choose Your Character</string>
     <string name= "choose_house">Choose Your House</string>
     <string name= "choose_job">Choose Your Job</string>
     <string name= "choose_pet">Choose Your Pet</string>
 
+
     <string name= "default_text">What will you pick?</string>
     <string name="character_name">Hercules</string>
     <string name="house_name">Floating Castle</string>
     <string name="job_name">Lawyer</string>
     <string name="pet_name">Ralph</string>
+
+    <string-array name="house_array">
+        <item>Cloud Island</item>
+        <item>Night Watch House</item>
+        <item>Hidden Island</item>
+        <item>Barn</item>
+    </string-array>    <string-array name="job_array">
+        <item>Lawyer</item>
+        <item>Doctor</item>
+        <item>Construction Worker</item>
+        <item>Fireman</item>
+    </string-array>    <string-array name="you_array">
+        <item>Hercules</item>
+        <item>Zayne</item>
+        <item>Cleopatra</item>
+        <item>Regina</item>
+        <item>Samantha</item>
+        <item>Dean</item>
+    </string-array>    <string-array name="pet_array">
+        <item>Ralph</item>
+        <item>Michael</item>
+        <item>Sandy</item>
+        <item>Mittens</item>
+        <item>Nathaniel</item>
+    </string-array>
 
 </resources>

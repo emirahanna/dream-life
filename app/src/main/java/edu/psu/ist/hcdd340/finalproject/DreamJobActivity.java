@@ -8,9 +8,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.imageview.ShapeableImageView;
@@ -27,16 +32,17 @@ final class DreamJob extends DreamLifeOptions {
 public class DreamJobActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "DREAM_LIFE_ACTIVITY";
-    private TextView dynamicText;
+    private Spinner spinner;
 
-    private final int[] ACTION_ICON_IDS = {R.id.prev_button, R.id.next_button, R.id.next_button};
+    private static final int[] ACTION_ICON_IDS = {R.id.next_button, R.id.save_button, R.id.prev_button, R.id.createVisionBoardButton};
+
 
     //array of possible options for a dream job
     private final DreamJob[] JOB_PROFILES = {
 
             new DreamJob("Lawyer", R.drawable.gavel),
             new DreamJob("Doctor", R.drawable.stethoscope),
-            new DreamJob("Constructor Worker", R.drawable.hardhat),
+            new DreamJob("Construction Worker", R.drawable.hardhat),
             new DreamJob("Fireman", R.drawable.firetruck)
         };
 
@@ -51,16 +57,45 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         ShapeableImageView saveButton = findViewById(R.id.save_button);
         saveButton.setOnClickListener(this);
 
-        dynamicText = findViewById(R.id.dynamicText);
+        TextView dynamicText = findViewById(R.id.dynamicText);
         dynamicText.setText(getString(R.string.choose_job));
 
-        TextView nameText = findViewById(R.id.nameText);
-        nameText.setText("Lawyer");
+//        TextView nameText = findViewById(R.id.nameText);
+//        nameText.setText("Lawyer");
 
         //Set event handler for icons
         for (int id : ACTION_ICON_IDS) {
             findViewById(id).setOnClickListener(this);
         }
+        setUpSpinner();
+    }
+
+    private void setUpSpinner() {
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.job_array, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner = findViewById(R.id.character_options_spinner);
+        spinner.setAdapter(adapter);
+
+        // Set the OnItemSelectedListener
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Get the selected item
+                // Fetch the selected DreamYou object using the position
+                DreamJob selectedDreamYou = JOB_PROFILES[position];
+
+                // Update the image based on the selected item
+                updateImage(selectedDreamYou);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
     }
     /**
      * this method gives functionality to the buttons displayed on the screen
@@ -72,32 +107,46 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         if ((id == R.id.next_button)) {
             DreamJob nextProfile = moveToNextProfile();
             updateImage(nextProfile);
-            updateName(nextProfile);
+            updateName();
 
         } else if (id == R.id.prev_button) {
             DreamJob previousProfile = moveToPreviousProfile();
             updateImage(previousProfile);
-            updateName(previousProfile);
+            updateName();
 
         } else if (id == R.id.save_button) {
             saveCurrentProfile();
-            ShapeableImageView icon = findViewById(R.id.save_button);
+            Button icon = findViewById(R.id.createVisionBoardButton);
             Snackbar.make(icon,
                     R.string.save_confirmation,
                     Snackbar.LENGTH_SHORT).show();
-        } else Log.d(TAG, "Unknown ID: " + id);
+        } else if (id == R.id.createVisionBoardButton) {
+            VisionBoardManager vbManager = new VisionBoardManager(this);
+            if (vbManager.canCreateVisionBoard()) {
+                vbManager.saveVisionBoard();
+                Button icon = findViewById(R.id.createVisionBoardButton);
+                Snackbar.make(icon, R.string.vb_saved, Snackbar.LENGTH_SHORT).show();
+            } else {
+                AlertDialog.Builder d = new AlertDialog.Builder(this);
+                d.setTitle("Incomplete information");
+                d.setMessage("Please select a Job, House, Pet and Character to create vision board");
+                d.setPositiveButton(android.R.string.ok, null);
+                d.show();
+            }
+        }
+        else Log.d(TAG, "Unknown ID: " + id);
     }
 
     //saves currently selected profile
     private void saveCurrentProfile(){
         DreamJob currentProfile = getCurrentProfile();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserSelections", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREF_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //save the profile's name and image ID
-        editor.putString("jobName", currentProfile.getName());
-        editor.putInt("jobImageID", currentProfile.getImageID());
+        editor.putString("job_name", currentProfile.getName());
+        editor.putInt("job_image_ID", currentProfile.getImageID());
         editor.apply();
 
         Log.d(TAG, "Profile saved: " + currentProfile.getName());
@@ -143,10 +192,9 @@ public class DreamJobActivity extends AppCompatActivity implements View.OnClickL
         return JOB_PROFILES[index];
     }
 
-    private void updateName(DreamJob profile)
+    private void updateName()
     {
-        TextView nameTextView = findViewById(R.id.nameText);
-        nameTextView.setText(profile.getName());
+        spinner.setSelection(index);
     }
 
     private DreamJob getCurrentProfile() {

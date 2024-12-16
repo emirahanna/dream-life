@@ -16,5 +16,13 @@
     <style name="GradientCard_DarkPurple" parent="CardView">
         <item name="cardBackgroundColor">@drawable/dark_purple_gradient</item>
     </style>
+    <style name="roundedShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+    <style name="circleShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
 </resources>

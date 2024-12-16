@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity  implements View.OnClick
                         "Registered!",
                         Snackbar.LENGTH_LONG).show();
 
-                Intent intent = new Intent(this, DreamYouActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
             else{
