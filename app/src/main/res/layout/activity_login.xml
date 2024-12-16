@@ -47,11 +47,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/app_logo_login_land"
         android:layout_width="238dp"
         android:layout_height="217dp"
         android:layout_marginTop="64dp"
         android:layout_marginBottom="20dp"
+        android:contentDescription="app logo"
         app:layout_constraintBottom_toTopOf="@+id/username_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
@@ -17,24 +18,6 @@
             android:layout_height="wrap_content"
             android:background="@color/background_color"
             android:padding="16dp">
-
-            <ImageButton
-                android:id="@+id/home_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:adjustViewBounds="false"
-                android:background="@null"
-                android:contentDescription="@string/home_button_desc"
-                android:padding="8dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/baseline_home_filled_24"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/historyButton"
@@ -59,18 +42,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:layout_toEndOf="@+id/home_button"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
                 android:text="@string/title_desc"
                 android:textColor="@color/tertiary_color"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/home_button"
                 app:layout_constraintEnd_toStartOf="@+id/historyButton"
-                app:layout_constraintStart_toEndOf="@+id/home_button"
-                app:layout_constraintTop_toTopOf="@+id/home_button" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Date Text -->
 
@@ -137,6 +119,7 @@
 
                 <ImageView
                     android:id="@+id/pushpin2"
+                    android:contentDescription="@string/pushpin"
                     android:layout_width="43dp"
                     android:layout_height="47dp"
                     android:layout_alignEnd="@id/imageViewJob"
@@ -156,6 +139,7 @@
 
                 <ImageView
                     android:id="@+id/pushpin4"
+                    android:contentDescription="@string/pushpin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignStart="@id/imageViewPet"
@@ -166,6 +150,7 @@
 
                 <ImageView
                     android:id="@+id/pushpin3"
+                    android:contentDescription="@string/pushpin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignStart="@id/imageViewSelf"
@@ -176,6 +161,7 @@
                 <ImageView
                     android:id="@+id/pushpin1"
                     android:layout_width="40dp"
+                    android:contentDescription="@string/pushpin"
                     android:layout_height="40dp"
                     android:layout_alignEnd="@id/imageViewHome"
                     android:layout_marginTop="3dp"

@@ -81,10 +81,6 @@ public class VisionBoardActivity extends AppCompatActivity {
             ImageButton btnHistory = findViewById(R.id.historyButton);
             btnHistory.setOnClickListener( e -> createIntentAndStartActivity(this, VisionBoardRecyclerView.class));
 
-            ImageButton btnHome = findViewById(R.id.home_button);
-            btnHome.setOnClickListener( e -> createIntentAndStartActivity(this, MainActivity.class));
-
-
 
         } else {
             // Handle the case where the position is not valid (optional)

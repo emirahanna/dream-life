@@ -33,6 +33,9 @@ public class AppHelper{
         }else if (menuId == R.id.menu_vision){
             changedClass = VisionBoardRecyclerView.class;
         }
+        else if (menuId == R.id.menu_home){
+            changedClass = MainActivity.class;
+        }
 
         return changedClass;
     }
@@ -41,8 +44,8 @@ public class AppHelper{
         final EditText input = new EditText(context);
 
         // Create and configure the AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Name Your Vision Board")
+        AlertDialog.Builder d = new AlertDialog.Builder(context);
+        d.setTitle("Name Your Vision Board")
                 .setMessage("Please enter a title:")
                 .setView(input) // Set the EditText inside the dialog
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

@@ -11,11 +11,12 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/app_logo_login_land"
         android:layout_width="238dp"
         android:layout_height="217dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="64dp"
+        android:contentDescription="@string/app_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -70,7 +71,7 @@
         android:text="@string/user_name_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/app_logo_login_land"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
