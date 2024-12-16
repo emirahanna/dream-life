@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // Set button functionality (using lambdas!!!) Love this for us
         visionBoardCard.setOnClickListener(e -> {
 
-            createIntentAndStartActivity(this, VisionBoardActivity.class);
+            createIntentAndStartActivity(this, VisionBoardRecyclerView.class);
         });
         quoteCard.setOnClickListener(e -> quoteTextView.setText(getRandomQuote()));
         dreamsLifeCard.setOnClickListener(e -> {

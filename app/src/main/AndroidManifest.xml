@@ -17,6 +17,9 @@
             android:name=".RegisterActivity"
             android:exported="true"></activity>
         <activity
+            android:name=".VisionBoardRecyclerView"
+            android:exported="true"></activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

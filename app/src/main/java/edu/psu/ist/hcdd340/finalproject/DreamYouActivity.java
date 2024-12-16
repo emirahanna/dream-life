@@ -114,13 +114,12 @@ public class DreamYouActivity extends AppCompatActivity implements View.OnClickL
         } else if (id == R.id.createVisionBoardButton) {
             VisionBoardManager vbManager = new VisionBoardManager(this);
             if (vbManager.canCreateVisionBoard()) {
-                vbManager.saveVisionBoard();
-                Button icon = findViewById(R.id.createVisionBoardButton);
-                Snackbar.make(icon, R.string.vb_saved, Snackbar.LENGTH_SHORT).show();
+                AppHelper.showInputDialog(this);
+
             } else {
                 AlertDialog.Builder d = new AlertDialog.Builder(this);
                 d.setTitle("Incomplete information");
-                d.setMessage("Please select a Job, House, Pet and Character to create vision board");
+                d.setMessage("Please select a Job, House, Pet and Character to create vision board" );
                 d.setPositiveButton(android.R.string.ok, null);
                 d.show();
             }

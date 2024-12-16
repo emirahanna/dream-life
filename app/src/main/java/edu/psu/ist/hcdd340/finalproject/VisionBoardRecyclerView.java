@@ -2,15 +2,20 @@ package edu.psu.ist.hcdd340.finalproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class VisionBoardActivity extends AppCompatActivity {
+import java.util.List;
 
+public class VisionBoardRecyclerView extends AppCompatActivity {
+    public static VisionBoardAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +60,27 @@ public class VisionBoardActivity extends AppCompatActivity {
 //        ivJob.setImageResource(jobImageId);
 //        ivPet.setImageResource(petImageId);
 
-        setContentView(R.layout.activity_visionboard);
+//        setContentView(R.layout.activity_visionboard);
+        setContentView(R.layout.activity_visionboard_recycler_view);
+
+        VisionBoardManager vbManager = new VisionBoardManager(this);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Get vision boards for the current user
+        String currentUserName = getCurrentUserName();
+        List<VisionBoard> visionBoards = vbManager.getVisionBoards(currentUserName);
+
+        // Set up the adapter
+        adapter = new VisionBoardAdapter(visionBoards, this);
+        recyclerView.setAdapter(adapter);
     }
+
+    private String getCurrentUserName() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences(MainActivity.SHARED_PREF_NAME, MODE_PRIVATE);
+        return sharedPreferences.getString(UserManager.CURRENT_USER_KEY, "bestie");
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
