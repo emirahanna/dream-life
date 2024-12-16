@@ -21,7 +21,7 @@ public class VisionBoardManager {
     public VisionBoardManager(Context context) {
         this.context = context;
         sharedPreferencesVisionBoard = context.getSharedPreferences(VISION_BOARD_MANAGER_TAG, Context.MODE_PRIVATE);
-        sharedPreferencesSelections = context.getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        sharedPreferencesSelections = context.getSharedPreferences(MainActivity.CURRENT_STATE, Context.MODE_PRIVATE);
     }
 
 
@@ -105,8 +105,56 @@ public class VisionBoardManager {
         return gson.fromJson(json, type);
     }
 
+    public void removeVisionBoard(String title) {
+        SharedPreferences.Editor editor = sharedPreferencesVisionBoard.edit();
 
+        // Get the current username
+        String userName = sharedPreferencesSelections.getString("curr_user", "");
+        if (userName.isEmpty()) {
+            Log.e("RemoveVisionBoard", "No current user found. Aborting remove.");
+            return;
+        }
 
+        // Get the existing list of vision boards for this user
+        String json = sharedPreferencesVisionBoard.getString(userName, "[]");
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<VisionBoard>>(){}.getType();
+        List<VisionBoard> visionBoardList;
 
+        try {
+            // Attempt to deserialize JSON into a list of VisionBoard objects
+            visionBoardList = gson.fromJson(json, type);
+
+            // Ensure the list is not null
+            if (visionBoardList == null) {
+                visionBoardList = new ArrayList<>();
+            }
+        } catch (Exception e) {
+            // Handle invalid JSON by creating a new empty list
+            visionBoardList = new ArrayList<>();
+            Log.e("RemoveVisionBoard", "Error parsing vision boards JSON. Resetting to empty list.", e);
+        }
+
+        // Find and remove the vision board with the specified title
+        boolean removed = false;
+        for (int i = 0; i < visionBoardList.size(); i++) {
+            if (visionBoardList.get(i).getVbTitle().equals(title)) {
+                visionBoardList.remove(i);
+                removed = true;
+                break;
+            }
+        }
+
+        if (removed) {
+            // Save the updated list back to SharedPreferences
+            String updatedJson = gson.toJson(visionBoardList);
+            editor.putString(userName, updatedJson); // Key is the username
+            editor.apply();
+
+            Log.d("RemoveVisionBoard", "Vision board with title '" + title + "' removed successfully.");
+        } else {
+            Log.e("RemoveVisionBoard", "No vision board found with title '" + title + "'.");
+        }
+    }
 
 }

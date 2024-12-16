@@ -20,47 +20,6 @@ public class VisionBoardRecyclerView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-//        ImageView ivSelf = findViewById(R.id.ivSelf);
-//        ImageView ivHome = findViewById(R.id.ivHome);
-//        ImageView ivJob = findViewById(R.id.ivJob);
-//        ImageView ivPet = findViewById(R.id.ivPet);
-//
-//        Button btnClear = findViewById(R.id.btnClear);
-//
-//        btnClear.setOnClickListener(v ->{
-//            int defaultAvatar = R.drawable.avtr;
-//
-//            ivSelf.setImageResource(defaultAvatar);
-//            ivHome.setImageResource(defaultAvatar);
-//            ivJob.setImageResource(defaultAvatar);
-//            ivPet.setImageResource(defaultAvatar);
-//
-//            SharedPreferences sharedPreferences = getSharedPreferences("UserSelection", MODE_PRIVATE);
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//
-//            editor.remove("selfProfileImageID");
-//            editor.remove("homeImageID");
-//            editor.remove("jobImageID");
-//            editor.remove("petImageID");
-//            editor.apply();
-//
-//            Snackbar.make(v, "All selections cleared!", Snackbar.LENGTH_SHORT).show();
-//        });
-//
-//        SharedPreferences sharedPreferences = getSharedPreferences("UserSelections", MODE_PRIVATE);
-//
-//        int selfImageId = sharedPreferences.getInt("selfProfileImageID", R.drawable.avtr);
-//        int homeImageId = sharedPreferences.getInt("houseImageID", R.drawable.avtr);
-//        int jobImageId = sharedPreferences.getInt("jobImageID", R.drawable.avtr);
-//        int petImageId = sharedPreferences.getInt("petImageID", R.drawable.avtr);
-//
-//        ivSelf.setImageResource(selfImageId);
-//        ivHome.setImageResource(homeImageId);
-//        ivJob.setImageResource(jobImageId);
-//        ivPet.setImageResource(petImageId);
-
-//        setContentView(R.layout.activity_visionboard);
         setContentView(R.layout.activity_visionboard_recycler_view);
 
         VisionBoardManager vbManager = new VisionBoardManager(this);
@@ -77,7 +36,7 @@ public class VisionBoardRecyclerView extends AppCompatActivity {
     }
 
     private String getCurrentUserName() {
-        SharedPreferences sharedPreferences = this.getSharedPreferences(MainActivity.SHARED_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences(MainActivity.CURRENT_STATE, MODE_PRIVATE);
         return sharedPreferences.getString(UserManager.CURRENT_USER_KEY, "bestie");
     }
 

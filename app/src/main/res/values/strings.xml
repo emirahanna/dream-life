@@ -52,12 +52,12 @@
     <string name= "choose_job">Choose Your Job</string>
     <string name= "choose_pet">Choose Your Pet</string>
 
+    <string name= "home_button_desc">Home Button</string>
+    <string name= "history_button_desc">History Button</string>
+    <string name= "title_desc">My Vision Board</string>
 
     <string name= "default_text">What will you pick?</string>
-    <string name="character_name">Hercules</string>
-    <string name="house_name">Floating Castle</string>
-    <string name="job_name">Lawyer</string>
-    <string name="pet_name">Ralph</string>
+    <string name="clear">Clear</string>
 
     <string-array name="house_array">
         <item>Cloud Island</item>

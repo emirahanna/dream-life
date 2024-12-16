@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    private static final String PREFS_NAME = "USER_DATABASE";
+    public static final String PREFS_NAME = "USER_DATABASE";
     private static final String USERS_KEY = "Users";
     public static final String CURRENT_STATE_KEY = "logged_in";
     public static final String CURRENT_USER_KEY = "curr_user";
@@ -19,7 +19,7 @@ public class UserManager {
 
     public UserManager(Context context) {
         sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        currentState = context.getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        currentState = context.getSharedPreferences(MainActivity.CURRENT_STATE, Context.MODE_PRIVATE);
         gson = new Gson();
     }
 

@@ -61,7 +61,14 @@ public class VisionBoardAdapter extends RecyclerView.Adapter<VisionBoardAdapter.
                     // Create the Intent to navigate to VisionBoardActivity
                     Intent intent = new Intent(context, VisionBoardActivity.class);
                     // You can pass data to VisionBoardActivity via intent if needed
-                    intent.putExtra("item", String.valueOf(visionBoardList.get(getAdapterPosition())));
+                    //intent.putExtra("item", String.valueOf(visionBoardList.get(getAdapterPosition())));
+
+                    // Assuming the position is passed as an integer
+                    intent.putExtra("position", getAdapterPosition());
+
+//                    VisionBoard visionBoard = visionBoardList.get(getAdapterPosition());
+//                    String title = visionBoard.getVbTitle();
+//                    intent.putExtra("item",title );
                     context.startActivity(intent);
                 }
             });

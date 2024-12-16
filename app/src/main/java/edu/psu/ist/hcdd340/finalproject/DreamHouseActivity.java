@@ -141,7 +141,7 @@ public class DreamHouseActivity extends AppCompatActivity implements View.OnClic
     private void saveCurrentProfile() {
         DreamHouse currentProfile = getCurrentProfile();
 
-        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.CURRENT_STATE, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //save the profile's name and image ID

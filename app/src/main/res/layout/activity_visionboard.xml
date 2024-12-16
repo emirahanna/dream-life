@@ -1,56 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/background_color"> <!-- Light purple background -->
+    android:background="@color/background_color"
+    android:padding="16dp"> <!-- Light purple background -->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/corkboard"
-        android:padding="16dp">
-
-    </RelativeLayout>
-
-    <!-- Back Button -->
     <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/home_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:contentDescription="Back Button"
-        android:background="@null"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:contentDescription="@string/home_button_desc"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:src="@drawable/baseline_home_filled_24"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- History Icon -->
     <ImageButton
         android:id="@+id/historyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
-        android:contentDescription="History Icon"
-        android:background="@null"/>
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@+id/visionBoardTitle"
+        android:background="@null"
+        android:contentDescription="@string/history_button_desc"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/history_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/visionBoardTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Title -->
     <TextView
         android:id="@+id/visionBoardTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="My Vision Board"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@+id/home_button"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:text="@string/title_desc"
+        android:textColor="@color/tertiary_color"
         android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/home_button"
+        app:layout_constraintEnd_toStartOf="@+id/historyButton"
+        app:layout_constraintStart_toEndOf="@+id/home_button"
+        app:layout_constraintTop_toTopOf="@+id/home_button" />
 
     <!-- Date Text -->
+
     <TextView
         android:id="@+id/dateText"
         android:layout_width="wrap_content"
@@ -58,83 +69,129 @@
         android:layout_below="@id/visionBoardTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:text="Date: 12/12/2024"
-        android:textSize="14sp"/>
-
-    <ImageView
-        android:id="@+id/pushpin1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:srcCompat="@drawable/pushpin" />
-
-    <ImageView
-        android:id="@+id/imageViewSelf"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/dateText"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="112dp"
-        android:background="@drawable/image_border" />
+        android:text="@string/placeholder"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/visionBoardTitle"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="@+id/visionBoardTitle"
+        app:layout_constraintTop_toBottomOf="@+id/visionBoardTitle" />
 
 
-    <ImageView
-        android:id="@+id/pushpin2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:srcCompat="@drawable/pushpin" />
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/corkboard"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonClear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateText">
 
-    <ImageView
-        android:id="@+id/imageViewHome"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/dateText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="74dp"
-        android:layout_marginEnd="56dp"
-        android:background="@drawable/image_border" />
+        <!-- ImageView1 (Self) -->
+
+        <!-- Pushpin1 -->
+
+        <!-- ImageView2 (Home) -->
+
+        <!-- Pushpin2 -->
+
+        <ImageView
+            android:id="@+id/imageViewSelf"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/image_border"
+            android:rotation="8" />
 
 
-    <ImageView
-        android:id="@+id/pushpin3"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:srcCompat="@drawable/pushpin" />
+        <ImageView
+            android:id="@+id/imageViewHome"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/image_border"
+            android:rotation="-20" />
 
-    <ImageView
-        android:id="@+id/imageViewJob"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/imageViewSelf"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="87dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/image_border"  />
+        <ImageView
+            android:id="@+id/imageViewJob"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/imageViewSelf"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="66dp"
+            android:background="@drawable/image_border"
+            android:rotation="-20" />
 
-    <ImageView
-        android:id="@+id/imageViewPet"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/imageViewHome"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="43dp"
-        android:background="@drawable/image_border" />
+        <ImageView
+            android:id="@+id/pushpin2"
+            android:layout_width="43dp"
+            android:layout_height="47dp"
+            android:layout_alignEnd="@id/imageViewJob"
+            android:layout_marginTop="260dp"
+            android:layout_marginEnd="54dp"
+            app:srcCompat="@drawable/pushpin" />
+
+        <ImageView
+            android:id="@+id/imageViewPet"
+            android:layout_width="155dp"
+            android:layout_height="155dp"
+            android:layout_below="@id/imageViewHome"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/image_border"
+            android:rotation="8"
+            android:rotationX="-1" />
+
+        <ImageView
+            android:id="@+id/pushpin4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignEnd="@id/imageViewPet"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="15dp"
+            app:srcCompat="@drawable/pushpin" />
+
+
+        <ImageView
+            android:id="@+id/pushpin3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@id/imageViewJob"
+            android:layout_marginStart="47dp"
+            android:layout_marginTop="36dp"
+            app:srcCompat="@drawable/pushpin" />
+
+        <ImageView
+            android:id="@+id/pushpin1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignEnd="@id/imageViewHome"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="42dp"
+            app:srcCompat="@drawable/pushpin" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/buttonClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
-        android:text="Clear"/>
-
-    <ImageView
-        android:id="@+id/pushpin4"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="296dp"
-        app:srcCompat="@drawable/pushpin" />
-
-</RelativeLayout>
+        android:text="@string/clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

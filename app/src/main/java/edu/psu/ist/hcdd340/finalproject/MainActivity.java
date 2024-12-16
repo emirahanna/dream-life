@@ -17,13 +17,13 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
 
-    public static final String SHARED_PREF_NAME = "CURRENT_STATE";
+    public static final String CURRENT_STATE = "CURRENT_STATE";
     private TextView quoteTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedPreferences = this.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences(CURRENT_STATE, MODE_PRIVATE);
         //not logged in
         if (!sharedPreferences.getBoolean(UserManager.CURRENT_STATE_KEY, false)) {
             Intent intent = new Intent(this, LogInActivity.class);

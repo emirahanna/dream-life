@@ -27,4 +27,20 @@ final class VisionBoard {
     public String getDate() {
         return createdOn;
     }
+
+    public int getDreamHouseID() {
+        return dreamHouse.getImageID();
+    }
+
+    public int getDreamJobID() {
+        return dreamJob.getImageID();
+    }
+
+    public int getDreamYouID() {
+        return dreamYou.getImageID();
+    }
+
+    public int getDreamPetID() {
+        return dreamPet.getImageID();
+    }
 }
