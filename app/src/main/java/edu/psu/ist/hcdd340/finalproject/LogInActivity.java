@@ -2,6 +2,7 @@ package edu.psu.ist.hcdd340.finalproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,9 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
             if (userManager.validateLogin(userName, password)) {
                 Snackbar.make(btn, "Login successful!", Snackbar.LENGTH_SHORT).show();
+                SharedPreferences currentState = getSharedPreferences(MainActivity.CURRENT_STATE, MODE_PRIVATE);
+                currentState.edit().putBoolean(UserManager.CURRENT_STATE_KEY, true).apply();
+                currentState.edit().putString(UserManager.CURRENT_USER_KEY,userName).apply();
                 // Proceed to the user's dashboard or app home screen
                 createIntentAndStartActivity(this, MainActivity.class);
             } else {

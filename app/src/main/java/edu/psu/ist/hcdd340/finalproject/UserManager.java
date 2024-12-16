@@ -28,8 +28,9 @@ public class UserManager {
         String json = gson.toJson(users);
         sharedPreferences.edit().putString(USERS_KEY, json).apply();
         currentState.edit().putBoolean(CURRENT_STATE_KEY, true).apply();
-        currentState.edit().putString(CURRENT_USER_KEY, users.get(0).getUsername()).apply();
+        currentState.edit().putString(CURRENT_USER_KEY, users.get(users.size()-1).getUsername()).apply();
     }
+
 
     // Retrieve all users
     public List<User> getUsers() {

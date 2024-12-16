@@ -65,6 +65,17 @@ public class VisionBoardManager {
         editor.putString(userName, updatedJson); // Key is the username
         editor.apply();
 
+        SharedPreferences.Editor editSelections = sharedPreferencesSelections.edit();
+        editSelections.remove("pet_name");
+        editSelections.remove("pet_image_ID");
+        editSelections.remove("you_name");
+        editSelections.remove("you_image_ID");
+        editSelections.remove("job_name");
+        editSelections.remove("job_image_ID");
+        editSelections.remove("house_name");
+        editSelections.remove("house_image_ID");
+        editSelections.apply();
+
         Log.d("SaveVisionBoard", "Vision board saved successfully for user: " + userName);
     }
 
