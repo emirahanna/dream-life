@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         });
         quoteCard.setOnClickListener(e -> quoteTextView.setText(getRandomQuote()));
         dreamsLifeCard.setOnClickListener(e -> {
-            Log.v("FUCK", "Button clicked");
             createIntentAndStartActivity(this, DreamYouActivity.class);});
     }
 

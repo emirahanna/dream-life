@@ -58,7 +58,6 @@ public class VisionBoardManager {
 
         // Add the new vision board
         VisionBoard newBoard = createVisionBoard(sharedPreferencesSelections, userName, title);
-        Log.v("FUCK", newBoard.getVbTitle());
         visionBoardList.add(newBoard);
 
         // Save the updated list back to SharedPreferences
@@ -82,8 +81,6 @@ public class VisionBoardManager {
 
         String dreamJobName = sp.getString("job_name", "");
         int dreamJobImageID = sp.getInt("job_image_ID", 0);
-
-        Log.v("FUCK", dreamYouName + " " + dreamJobName + " " + dreamPetName + " " + dreamHouseName + " ");
 
         return new VisionBoard(u, title, new Date().toString(), new DreamHouse(dreamHouseName, dreamHouseImageID), new DreamJob(dreamJobName, dreamJobImageID), new DreamYou(dreamYouName, dreamYouImageID), new DreamPet(dreamPetName, dreamPetImageID));
     }
